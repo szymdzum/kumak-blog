@@ -1,7 +1,113 @@
 ---
 const today = new Date();
+
+// src/components/SiteFooter.astro
+// import Github from "lucide-react/icons/github";
+// import Twitter from "lucide-react/icons/twitter";
 ---
 
-<footer>
-  &copy; {today.getFullYear()} Kumak. All rights reserved.
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p>Built with Next.js, Tailwind CSS, and shadcn/ui</p>
+    </div>
+    <div class="social-links">
+      <a href="https://github.com/yourusername" target="_blank" rel="noreferrer">
+        Github
+        <span class="sr-only">GitHub</span>
+      </a>
+      <a href="https://twitter.com/yourusername" target="_blank" rel="noreferrer">
+        Twitter
+        <span class="sr-only">Twitter</span>
+      </a>
+    </div>
+  </div>
 </footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(var(--border-rgb), 0.4);
+    background-color: var(--color-background);
+  }
+
+  .container {
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: var(--s1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s1);
+    padding-block: var(--s2);
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      flex-direction: row;
+      height: 6rem; /* md:h-24 */
+      padding-block: 0;
+    }
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s1);
+    padding-inline: var(--s2);
+  }
+
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row;
+      gap: var(--s-1);
+      padding-inline: 0;
+    }
+  }
+
+  .footer-content p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-content p {
+      text-align: left;
+    }
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: var(--s1);
+  }
+
+  .social-links a {
+    color: var(--color-muted);
+    transition: color 0.2s ease;
+  }
+
+  .social-links a:hover {
+    color: var(--color-foreground);
+  }
+
+  .social-links a :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
