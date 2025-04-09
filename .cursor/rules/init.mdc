@@ -9,3 +9,168 @@ alwaysApply: true
 - using deno as runtime
 
 - Always work in small, incremental steps. After completing each step, validate the result by explicitly confirming whether it aligns with the intended goal. At every stage, ask: “Is this what we are trying to achieve?” This ensures continuous alignment and reduces the risk of compounding errors.
+
+# Fundamental CSS rule
+
+# CSS Framework Guidelines: The Power of Exception-Based Styling
+
+## Core Philosophy
+
+Our CSS framework follows the principle of **exception-based styling**. We set global defaults first, then handle exceptions where needed. This approach is more efficient, maintainable, and resilient than styling each element individually.
+
+## Fundamental Rules
+
+### 1. Start with Global Defaults
+
+Set default styles that apply to all relevant elements. Define these global rules using type selectors, universal selectors, or inheritance.
+
+```css
+/* Apply a reasonable measure to all elements by default */
+* {
+  max-width: 60ch;
+}
+
+/* Set sensible typography defaults that cascade down */
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+```
+
+### 2. Define Exceptions, Not Rules
+
+Rather than manually applying styles to each element that should follow a pattern, identify and style only the exceptions that should deviate from your global defaults.
+
+```css
+/* Define the global rule */
+* {
+  max-width: 60ch;
+}
+
+/* Then specify the exceptions */
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-width: none;
+}
+```
+
+### 3. Use Harmonious Proportions, Not Fixed Values
+
+Create visual harmony through proportional relationships rather than arbitrary fixed values. Base your design system on a modular scale derived from your typography.
+
+```css
+:root {
+  /* Base the scale on a meaningful ratio like 1.5 */
+  --ratio: 1.5;
+
+  /* Create a modular scale using this ratio */
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+  --s4: calc(var(--s3) * var(--ratio));
+  --s5: calc(var(--s4) * var(--ratio));
+
+  /* Negative scale for smaller values */
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+}
+```
+
+Use these proportional values for spacing, padding, margins, and other dimensions to maintain consistent rhythm throughout your design:
+
+```css
+.stack > * + * {
+  margin-top: var(--s1);
+}
+
+.box {
+  padding: var(--s1);
+}
+
+h1 { font-size: var(--s3); }
+h2 { font-size: var(--s2); }
+h3 { font-size: var(--s1); }
+```
+
+### 4. Avoid Precise Pixel Values
+
+Resist the urge to convert between units precisely. Browsers handle subpixel rendering automatically:
+
+```css
+/* Preferred: Simple proportional values */
+h2 { font-size: 1.5rem; }
+
+/* Avoid: Precise pixel conversion */
+h2 { font-size: 1.43rem; /* exactly 23px if base is 16px */ }
+```
+
+### 5. Leverage the Cascade Intentionally
+
+Use the natural cascade and specificity of CSS to your advantage. Place more general styles earlier in your stylesheet and more specific exceptions later.
+
+### 6. Consider Selectors Carefully
+
+- Use type selectors for default element styling
+- Use class selectors for reusable patterns
+- Use attribute selectors for state variations
+- Use the universal selector (*) for truly global properties
+
+### 7. Promote Resilience Through Inheritance
+
+Utilize CSS inheritance to propagate properties that should be consistent (e.g., typography, colors) and only override them when necessary.
+
+```css
+.box {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+.box * {
+  color: inherit; /* Ensures all text inside boxes inherits color */
+}
+
+.box.invert {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+```
+
+### 8. Enforce Consistency with Custom Properties
+
+Define custom properties at the root level and use them throughout your styles to maintain consistency and make global changes easier.
+
+```css
+:root {
+  --measure: 60ch;
+  --s1: 1rem;
+  --border-thin: 1px;
+}
+```
+
+### 9. Write Self-Documenting CSS
+
+Name classes and custom properties clearly to indicate their purpose. Your CSS should explain why certain exceptions exist.
+
+## Implementation Approach
+
+1. **Begin with reset/normalize styles** that create a consistent baseline
+2. **Define global typographic styles** that cascade throughout the document
+3. **Create layout primitives** that handle common structural patterns
+4. **Apply component-specific styles** only where layout primitives need enhancement
+5. **Add utility classes sparingly** for one-off adjustments
+
+## Benefits
+
+- **Reduced CSS volume** - Write fewer rules by styling exceptions rather than every case
+- **Improved maintainability** - Changes to global styles cascade properly
+- **Better resilience** - Elements naturally inherit appropriate styles
+- **Cleaner HTML** - Markup remains free of unnecessary utility classes
+- **Fewer bugs** - Less chance of forgetting to style an element
+
+By following an exception-based approach with harmonious proportions, we create a CSS system that aligns with the cascade's natural strengths, resulting in more elegant, efficient, and maintainable code.

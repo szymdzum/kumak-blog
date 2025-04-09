@@ -2,9 +2,9 @@ name: Deno CI/CD
 
 on:
   push:
-    branches: ["main", "fix-deno-deploy"]
+    branches: ['main', 'fix-deno-deploy']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
 permissions:
   contents: read
@@ -63,6 +63,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "kumak-blog" # Your Deno Deploy project name
-          entrypoint: "server/entry.mjs" # The entry file is in dist/server/entry.mjs
-          root: "dist" # The root directory is already dist
+          project: 'kumak-blog' # Your Deno Deploy project name
+          entrypoint: 'server/entry.mjs' # The entry file is in dist/server/entry.mjs
+          root: 'dist' # The root directory is already dist

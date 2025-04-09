@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import deno from "@deno/astro-adapter";
+import deno from '@deno/astro-adapter';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   image: {
     service: {
-      entrypoint: 'astro/assets/services/noop'
-    }
+      entrypoint: 'astro/assets/services/noop',
+    },
   },
 });

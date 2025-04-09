@@ -4,6 +4,7 @@
     "npm:@astrojs/mdx@^4.2.3": "4.2.3_astro@5.6.1__vite@6.2.5__zod@3.24.2_acorn@8.14.1",
     "npm:@astrojs/rss@^4.0.11": "4.0.11",
     "npm:@astrojs/sitemap@^3.3.0": "3.3.0",
+    "npm:@deno/astro-adapter@*": "0.3.0_astro@5.6.1__vite@6.2.5__zod@3.24.2",
     "npm:astro@5.6.1": "5.6.1_vite@6.2.5_zod@3.24.2",
     "npm:astro@^5.6.1": "5.6.1_vite@6.2.5_zod@3.24.2"
   },
@@ -109,6 +110,12 @@
       "dependencies": [
         "@babel/helper-string-parser",
         "@babel/helper-validator-identifier"
+      ]
+    },
+    "@deno/astro-adapter@0.3.0_astro@5.6.1__vite@6.2.5__zod@3.24.2": {
+      "integrity": "sha512-HlN0k8XALGbzWCm58OPJBHWWpJUVXrAZRbEL/VUmZpVTl23+k3qlx7Pjdk1NcVNu1hKVl/6WTdwh9GUzd02Lpg==",
+      "dependencies": [
+        "astro"
       ]
     },
     "@emnapi/runtime@1.4.0": {
