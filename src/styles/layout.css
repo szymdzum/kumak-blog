@@ -1,0 +1,48 @@
+/* Base layout styles */
+body {
+  /* Layout-specific properties only */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+main {
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--padding-md);
+}
+
+footer {
+  margin-top: auto;
+  padding: var(--padding-sm);
+}
+
+.center {
+  box-sizing: content-box;
+  margin-inline: auto;
+  max-width: var(--max-width, var(--measure));
+  padding-inline: var(--padding, var(--s1));
+}
+
+/* ===== Imposter Layout ===== */
+.imposter {
+  --margin: 0px;
+
+  position: var(--positioning, absolute);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.imposter.contain {
+  overflow: auto;
+  max-width: calc(100% - var(--margin) * 2);
+  max-height: calc(100% - var(--margin) * 2);
+}
+
+.imposter.fixed {
+  --positioning: fixed;
+}

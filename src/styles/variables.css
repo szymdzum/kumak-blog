@@ -1,0 +1,101 @@
+/* Theme Variables */
+:root {
+  /* Light theme variables */
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-primary: #3273dc;
+  --color-secondary: #363636;
+  --color-accent: #ff470f;
+  --color-muted: #666666;
+  --color-border: #dbdbdb;
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  /* RGB values for rgba() usage */
+  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 17, 17, 17;
+  --border-rgb: 219, 219, 219;
+  --primary-rgb: 50, 115, 220;
+  --secondary-rgb: 54, 54, 54;
+  --accent-rgb: 255, 71, 15;
+
+  /* Border styles */
+  --border-thin: 1px;
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --blur-amount: 10px;
+
+  /* Layout variables */
+  --container-width: 1200px;
+  --header-height: 4rem;
+
+  /* Modular scale for spacing using a ratio of 1.5 */
+  --ratio: 1.5;
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio)); /* 1.5rem */
+  --s2: calc(var(--s1) * var(--ratio)); /* 2.25rem */
+  --s3: calc(var(--s2) * var(--ratio)); /* 3.375rem */
+  --s4: calc(var(--s3) * var(--ratio)); /* 5.063rem */
+  --s5: calc(var(--s4) * var(--ratio)); /* 7.594rem */
+  --s-1: calc(var(--s0) / var(--ratio)); /* 0.667rem */
+  --s-2: calc(var(--s-1) / var(--ratio)); /* 0.444rem */
+
+  /* Responsive padding using clamp */
+  --padding-xs: clamp(0.5rem, 1.5%, 0.75rem);
+  --padding-sm: clamp(1rem, 3%, 1.5rem);
+  --padding-md: clamp(1.5rem, 6%, 3rem);
+  --padding-lg: clamp(3rem, 12%, 6rem);
+  --padding-xl: clamp(4rem, 16%, 8rem);
+
+  /* Standard measure for readable text */
+  --measure: 60ch;
+
+  /* Theme transition */
+  --theme-transition: 0.2s ease-in-out;
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition);
+}
+
+/* Dark theme variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121212;
+    --color-text: #ffffff;
+    --color-primary: #66b3ff;
+    --color-secondary: #b5b5b5;
+    --color-accent: #ff7340;
+    --color-muted: #888888;
+    --color-border: #404040;
+    --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+
+    /* RGB values for dark theme */
+    --background-rgb: 18, 18, 18;
+    --foreground-rgb: 255, 255, 255;
+    --border-rgb: 64, 64, 64;
+    --primary-rgb: 102, 179, 255;
+    --secondary-rgb: 181, 181, 181;
+    --accent-rgb: 255, 115, 64;
+  }
+}
+
+/* Manual dark theme class */
+:root[data-theme='dark'] {
+  --color-bg: #121212;
+  --color-text: #ffffff;
+  --color-primary: #66b3ff;
+  --color-secondary: #b5b5b5;
+  --color-accent: #ff7340;
+  --color-muted: #888888;
+  --color-border: #404040;
+  --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+
+  /* RGB values for manual dark theme */
+  --background-rgb: 18, 18, 18;
+  --foreground-rgb: 255, 255, 255;
+  --border-rgb: 64, 64, 64;
+  --primary-rgb: 102, 179, 255;
+  --secondary-rgb: 181, 181, 181;
+  --accent-rgb: 255, 115, 64;
+}

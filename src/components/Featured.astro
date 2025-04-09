@@ -1,0 +1,182 @@
+---
+// src/components/FeaturedPosts.astro
+// import ArrowRight from "lucide-react/icons/arrow-right";
+
+// In a real implementation, this would fetch from a CMS or markdown files
+const featuredPosts = [
+  {
+    slug: "functional-programming-in-javascript",
+    title: "Functional Programming Patterns in JavaScript",
+    excerpt: "Exploring practical applications of functional programming concepts in modern JavaScript development.",
+    date: "2023-04-15",
+    tags: ["JavaScript", "Functional Programming", "Web Development"],
+  },
+  {
+    slug: "rust-for-javascript-developers",
+    title: "Rust for JavaScript Developers",
+    excerpt: "A practical guide to learning Rust from a JavaScript developer's perspective.",
+    date: "2023-03-22",
+    tags: ["Rust", "JavaScript", "Programming Languages"],
+  },
+  {
+    slug: "building-scalable-design-systems",
+    title: "Building Scalable Design Systems",
+    excerpt: "Strategies for creating and maintaining design systems that scale with your application.",
+    date: "2023-02-10",
+    tags: ["Design Systems", "UI/UX", "Frontend"],
+  },
+];
+
+// Helper function to format dates
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+}
+---
+
+<div class="featured-posts">
+  {featuredPosts.map((post) => (
+    <article class="post-card">
+      <header class="card-header">
+        <h3 class="card-title">
+          <a href={`/blog/${post.slug}`}>{post.title}</a>
+        </h3>
+        <div class="post-meta">
+          <time datetime={post.date}>{formatDate(post.date)}</time>
+        </div>
+      </header>
+
+      <div class="card-content">
+        <p>{post.excerpt}</p>
+      </div>
+
+      <footer class="card-footer">
+        <div class="tags">
+          {post.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+        <div class="read-more">
+          <a href={`/blog/${post.slug}`} class="read-more-link">
+            Read more
+          </a>
+        </div>
+      </footer>
+    </article>
+  ))}
+</div>
+
+<style>
+  .featured-posts {
+    margin: var(--s2) auto 0;
+    max-width: 64rem; /* 4xl */
+    display: grid;
+    gap: var(--s2);
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-card);
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: var(--s1);
+  }
+
+  .card-title {
+    font-size: var(--s1);
+    font-weight: 600;
+    margin-bottom: var(--s-2);
+  }
+
+  .card-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card-title a:hover {
+    text-decoration: underline;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-1);
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  .card-content {
+    padding: 0 var(--s1);
+    flex-grow: 1;
+  }
+
+  .card-content p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s1);
+    padding: var(--s1);
+  }
+
+  @media (min-width: 640px) {
+    .card-footer {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--s-1);
+    }
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: var(--radius-full);
+    background-color: var(--color-secondary-bg);
+    color: var(--color-secondary);
+  }
+
+  .read-more {
+    margin-left: auto;
+  }
+
+  .read-more-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .read-more-link:hover {
+    text-decoration: underline;
+  }
+
+  .read-more-link :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.25rem;
+  }
+</style>
