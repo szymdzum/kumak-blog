@@ -1,0 +1,73 @@
+:root {
+  /* Light theme variables */
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-primary: #3273dc;
+  --color-secondary: #363636;
+  --color-accent: #ff470f;
+  --color-muted: #666666;
+  --color-border: #dbdbdb;
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Add transitions for theme changes */
+:root,
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  --theme-transition: 0.2s ease-in-out;
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition);
+}
+
+/* Dark theme variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121212;
+    --color-text: #ffffff;
+    --color-primary: #66b3ff;
+    --color-secondary: #b5b5b5;
+    --color-accent: #ff7340;
+    --color-muted: #888888;
+    --color-border: #404040;
+    --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Manual dark theme class */
+:root[data-theme="dark"] {
+  --color-bg: #121212;
+  --color-text: #ffffff;
+  --color-primary: #66b3ff;
+  --color-secondary: #b5b5b5;
+  --color-accent: #ff7340;
+  --color-muted: #888888;
+  --color-border: #404040;
+  --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition);
+}
+
+a {
+  color: var(--color-primary);
+  transition: color var(--theme-transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-secondary);
+  transition: color var(--theme-transition);
+}
+
+hr {
+  border-color: var(--color-border);
+  transition: border-color var(--theme-transition);
+}

@@ -1,15 +1,41 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
 <header>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div>
+    <div class="internal-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
     </div>
+    <div class="theme-toggle">
+      <ThemeToggle />
+    </div>
   </nav>
 </header>
+
+<style>
+  header {
+    margin: 0;
+    padding: 0 1em;
+    background: var(--color-bg);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0;
+  }
+  .internal-links {
+    display: flex;
+    gap: 1em;
+  }
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+  }
+</style>
