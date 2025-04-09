@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- using deno as runtime
+
+- Always work in small, incremental steps. After completing each step, validate the result by explicitly confirming whether it aligns with the intended goal. At every stage, ask: “Is this what we are trying to achieve?” This ensures continuous alignment and reduces the risk of compounding errors.
