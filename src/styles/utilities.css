@@ -26,6 +26,19 @@
   padding-right: var(--padding-md);
 }
 
+/* Screen reader only class - visually hide content but keep it accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Buttons */
 button, .button {
   display: inline-block;
