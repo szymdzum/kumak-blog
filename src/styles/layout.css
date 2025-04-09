@@ -1,21 +1,19 @@
 /* Base layout styles */
 body {
+  /* Layout-specific properties only */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: var(--color-bg);
   color: var(--color-text);
   transition:
     background-color var(--theme-transition),
     color var(--theme-transition);
-
-  /* Sticky footer implementation */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 /* Main content */
 main {
   margin: 0 auto;
-  max-width: var(--measure);
   width: 100%;
   padding: var(--padding-md);
 }
@@ -30,4 +28,26 @@ footer {
 hr {
   border-color: var(--color-border);
   transition: border-color var(--theme-transition);
+}
+
+/* ===== Center Layout ===== */
+.center {
+  box-sizing: content-box;
+  max-width: var(--max-width, var(--measure));
+  margin-inline: auto;
+  padding-inline: var(--padding, var(--s1));
+}
+
+.center.text-center {
+  text-align: center;
+}
+
+.center.intrinsic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.center.intrinsic > * {
+  width: 100%;
 }

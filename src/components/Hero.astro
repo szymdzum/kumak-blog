@@ -7,7 +7,7 @@
 <section class="hero">
 
   <div class="container">
-    <div class="content">
+
       <h1>
         Crafting <span class="accent">elegant code</span> and sharing development insights
       </h1>
@@ -21,7 +21,7 @@
         <a href="/blog" class="button secondary">
           Read Blog
         </a>
-      </div>
+
     </div>
   </div>
 </section>
@@ -33,94 +33,13 @@
     padding-block: var(--s3);
   }
 
-  @media (min-width: 768px) {
-    .hero {
-      padding-block: var(--s4);
-    }
-  }
-
-  .background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
   .container {
     position: relative;
     z-index: 10;
-    max-width: var(--container-width);
     margin-inline: auto;
     padding-inline: var(--s1);
   }
 
-  .content {
-    max-width: 980px;
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--s1);
-    text-align: left;
-  }
-
-  @media (min-width: 640px) {
-    .content {
-      align-items: center;
-      text-align: center;
-    }
-  }
-
-  h1 {
-    font-weight: 700;
-    font-size: var(--s3);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  @media (min-width: 640px) {
-    h1 {
-      font-size: var(--s4);
-    }
-  }
-
-  @media (min-width: 768px) {
-    h1 {
-      font-size: var(--s5);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h1 {
-      font-size: var(--s6);
-    }
-  }
-
-  .accent {
-    color: var(--color-primary);
-  }
-
-  p {
-    color: var(--color-muted);
-  }
-
-  @media (min-width: 768px) {
-    p {
-      font-size: var(--s1);
-    }
-  }
-
-  .actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s1);
-    margin-top: var(--s1);
-  }
-
-  @media (min-width: 640px) {
-    .actions {
-      flex-direction: row;
-    }
-  }
 
   .button {
     display: inline-flex;

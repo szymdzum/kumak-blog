@@ -10,6 +10,24 @@
   --color-border: #dbdbdb;
   --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
+  /* RGB values for rgba() usage */
+  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 17, 17, 17;
+  --border-rgb: 219, 219, 219;
+  --primary-rgb: 50, 115, 220;
+  --secondary-rgb: 54, 54, 54;
+  --accent-rgb: 255, 71, 15;
+
+  /* Border styles */
+  --border-thin: 1px;
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --blur-amount: 10px;
+
+  /* Layout variables */
+  --container-width: 1200px;
+  --header-height: 4rem;
+
   /* Modular scale for spacing using a ratio of 1.5 */
   --ratio: 1.5;
   --s0: 1rem;
@@ -51,6 +69,14 @@
     --color-muted: #888888;
     --color-border: #404040;
     --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+
+    /* RGB values for dark theme */
+    --background-rgb: 18, 18, 18;
+    --foreground-rgb: 255, 255, 255;
+    --border-rgb: 64, 64, 64;
+    --primary-rgb: 102, 179, 255;
+    --secondary-rgb: 181, 181, 181;
+    --accent-rgb: 255, 115, 64;
   }
 }
 
@@ -64,4 +90,12 @@
   --color-muted: #888888;
   --color-border: #404040;
   --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+
+  /* RGB values for manual dark theme */
+  --background-rgb: 18, 18, 18;
+  --foreground-rgb: 255, 255, 255;
+  --border-rgb: 64, 64, 64;
+  --primary-rgb: 102, 179, 255;
+  --secondary-rgb: 181, 181, 181;
+  --accent-rgb: 255, 115, 64;
 }

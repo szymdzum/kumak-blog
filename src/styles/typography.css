@@ -17,7 +17,6 @@
   /* Standard measure for readable text */
   --measure: 60ch;
 }
-
 /* Improve text rendering */
 html {
   -webkit-text-size-adjust: 100%;
@@ -42,28 +41,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--s3);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   margin-bottom: var(--s1);
 }
 h2 {
-  font-size: var(--s2);
+  font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: var(--s0);
 }
 h3 {
-  font-size: var(--s1);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   margin-bottom: var(--s-1);
 }
 h4 {
-  font-size: var(--s0);
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   margin-bottom: var(--s-1);
 }
 h5 {
-  font-size: var(--s-1);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin-bottom: var(--s-1);
   font-weight: bold;
 }
 h6 {
-  font-size: var(--s-1);
+  font-size: clamp(0.875rem, 2vw, 1rem);
   margin-bottom: var(--s-1);
   font-weight: normal;
   font-style: italic;
@@ -207,14 +206,4 @@ pre code {
   background-color: var(--color-muted);
   font-family: 'GeistMono', monospace;
   font-size: 0.875rem;
-}
-
-/* Container class */
-.container {
-  width: 100%;
-  max-width: var(--container-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--s1);
-  padding-right: var(--s1);
 }
