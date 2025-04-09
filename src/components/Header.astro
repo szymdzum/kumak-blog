@@ -2,40 +2,346 @@
 import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { SITE_TITLE } from '../consts';
+
+// src/components/SiteHeader.astro
+// import Github from "lucide-react/icons/github"
+// import Menu from "lucide-react/icons/menu"
+
+// Get current pathname to determine active links
+const { pathname } = Astro.url;
+
+// Helper function to check if a link is active
+function isActive(href: string) {
+  if (href === '/') {
+    return pathname === '/';
+  }
+  return pathname.startsWith(href);
+}
 ---
 
-<header>
-  <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
+<header class="site-header">
+  <div class="container">
+    <!-- Desktop Navigation -->
+    <div class="desktop-nav">
+      <a href="/" class="logo">
+        <span class="logo-text">Code & Thoughts</span>
+      </a>
+      <nav>
+        <a href="/" class={isActive('/') ? 'active' : ''}>Home</a>
+        <a href="/projects" class={isActive('/projects') ? 'active' : ''}>Projects</a>
+        <a href="/blog" class={isActive('/blog') ? 'active' : ''}>Blog</a>
+        <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
+      </nav>
     </div>
-    <div class="theme-toggle">
-      <ThemeToggle />
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <button id="mobile-menu-trigger" class="menu-button" aria-expanded="false">.
+        <span class="sr-only">Toggle Menu</span>
+      </button>
+
+      <div id="mobile-drawer" class="drawer" aria-hidden="true">
+        <div class="drawer-content">
+          <a href="/" class="logo">
+            <span class="logo-text">Code & Thoughts</span>
+          </a>
+          <nav>
+            <a href="/" class={isActive('/') ? 'active' : ''}>Home</a>
+            <a href="/projects" class={isActive('/projects') ? 'active' : ''}>Projects</a>
+            <a href="/blog" class={isActive('/blog') ? 'active' : ''}>Blog</a>
+            <a href="/about" class={isActive('/about') ? 'active' : ''}>About</a>
+          </nav>
+        </div>
+      </div>
     </div>
-  </nav>
+
+    <!-- Right-side actions -->
+    <div class="actions">
+      <nav>
+        <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" class="button button-icon">
+          .
+          <span class="sr-only">GitHub</span>
+        </a>
+      </nav>
+    </div>
+  </div>
 </header>
 
 <style>
-  header {
-    margin: 0;
-    padding: 0 1em;
-    background: var(--color-bg);
+  /* Header Container */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    border-bottom: var(--border-thin) solid rgba(var(--border-rgb), 0.4);
+    background-color: rgba(var(--background-rgb), 0.95);
+    backdrop-filter: blur(var(--blur-amount));
   }
-  nav {
+
+  @supports (backdrop-filter: blur(1px)) {
+    .site-header {
+      background-color: rgba(var(--background-rgb), 0.6);
+    }
+  }
+
+  .container {
+    display: flex;
+    height: var(--header-height, 4rem);
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-inline: var(--s1);
+  }
+
+  /* Common Styles */
+  .logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1em 0;
+    text-decoration: none;
+    color: inherit;
   }
-  .internal-links {
-    display: flex;
-    gap: 1em;
+
+  .logo-text {
+    font-weight: 700;
   }
-  .theme-toggle {
+
+  /* Desktop Navigation */
+  .desktop-nav {
+    display: none;
+    margin-right: var(--s1);
+  }
+
+  @media (min-width: 768px) {
+    .desktop-nav {
+      display: flex;
+    }
+  }
+
+  .desktop-nav .logo {
+    margin-right: 1.5rem;
+  }
+
+  .desktop-nav nav {
     display: flex;
     align-items: center;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .desktop-nav nav a {
+    text-decoration: none;
+    color: rgba(var(--foreground-rgb), 0.6);
+    transition: color 0.2s ease;
+  }
+
+  .desktop-nav nav a:hover {
+    color: rgba(var(--foreground-rgb), 0.8);
+  }
+
+  .desktop-nav nav a.active {
+    color: rgb(var(--foreground-rgb));
+  }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+
+  .menu-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-right: var(--s-1);
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .menu-button:hover {
+    background-color: transparent;
+  }
+
+  .menu-button :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    max-width: 20rem;
+    height: 100vh;
+    background-color: rgb(var(--background-rgb));
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .drawer[aria-hidden="false"] {
+    transform: translateX(0);
+  }
+
+  .drawer-content {
+    padding: var(--s1);
+  }
+
+  .drawer-content nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+    margin-top: var(--s2);
+  }
+
+  .drawer-content nav a {
+    text-decoration: none;
+    color: rgba(var(--foreground-rgb), 0.6);
+    transition: color 0.2s ease;
+  }
+
+  .drawer-content nav a:hover {
+    color: rgb(var(--foreground-rgb));
+  }
+
+  .drawer-content nav a.active {
+    color: rgb(var(--foreground-rgb));
+  }
+
+  /* Drawer overlay */
+  .drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 99;
+  }
+
+  .drawer-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Right-side actions */
+  .actions {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .actions nav {
+    display: flex;
+    align-items: center;
+    gap: var(--s-1);
+  }
+
+  .button {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--icon-button-size, 2.5rem);
+    height: var(--icon-button-size, 2.5rem);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+  }
+
+  .button-icon:hover {
+    background-color: rgba(var(--foreground-rgb), 0.05);
+  }
+
+  .button-icon :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 </style>
+
+<script>
+  // Client-side code to handle the mobile menu
+  const menuTrigger = document.getElementById('mobile-menu-trigger');
+  const drawer = document.getElementById('mobile-drawer');
+
+  // Create overlay element
+  const overlay = document.createElement('div');
+  overlay.className = 'drawer-overlay';
+  document.body.appendChild(overlay);
+
+  function toggleMenu() {
+    if (!drawer) return;
+    const isOpen = drawer.getAttribute('aria-hidden') === 'false';
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  function openMenu() {
+    if (!drawer || !menuTrigger) return;
+    drawer.setAttribute('aria-hidden', 'false');
+    menuTrigger.setAttribute('aria-expanded', 'true');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+
+  function closeMenu() {
+    if (!drawer || !menuTrigger) return;
+    drawer.setAttribute('aria-hidden', 'true');
+    menuTrigger.setAttribute('aria-expanded', 'false');
+    overlay.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+
+  // Event listeners
+  if (menuTrigger) {
+    menuTrigger.addEventListener('click', toggleMenu);
+  }
+  overlay.addEventListener('click', closeMenu);
+
+  // Close menu when clicking on links
+  if (drawer) {
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+
+  // Close menu when Escape key is pressed
+  document.addEventListener('keydown', (e) => {
+    if (!drawer) return;
+    if (e.key === 'Escape' && drawer.getAttribute('aria-hidden') === 'false') {
+      closeMenu();
+    }
+  });
+</script>
