@@ -50,6 +50,9 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Install Deno Astro Adapter
+        run: deno add npm:@deno/astro-adapter
+
       - name: Build site
         run: deno run -A --allow-scripts npm:astro build
 
