@@ -11,7 +11,7 @@
       "*.md"
     ]
   },
-  "nodeModulesDir": true,
+  "nodeModulesDir": "auto",
   "deploy": {
     "project": "a8246023-a10c-4a50-9a25-adc312f14421",
     "exclude": [
