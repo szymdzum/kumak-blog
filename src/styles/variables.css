@@ -1,3 +1,4 @@
+/* Theme Variables */
 :root {
   /* Light theme variables */
   --color-bg: #ffffff;
@@ -8,12 +9,29 @@
   --color-muted: #666666;
   --color-border: #dbdbdb;
   --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
 
-/* Add transitions for theme changes */
-:root,
-:root[data-theme='light'],
-:root[data-theme='dark'] {
+  /* Modular scale for spacing using a ratio of 1.5 */
+  --ratio: 1.5;
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio)); /* 1.5rem */
+  --s2: calc(var(--s1) * var(--ratio)); /* 2.25rem */
+  --s3: calc(var(--s2) * var(--ratio)); /* 3.375rem */
+  --s4: calc(var(--s3) * var(--ratio)); /* 5.063rem */
+  --s5: calc(var(--s4) * var(--ratio)); /* 7.594rem */
+  --s-1: calc(var(--s0) / var(--ratio)); /* 0.667rem */
+  --s-2: calc(var(--s-1) / var(--ratio)); /* 0.444rem */
+
+  /* Responsive padding using clamp */
+  --padding-xs: clamp(0.5rem, 1.5%, 0.75rem);
+  --padding-sm: clamp(1rem, 3%, 1.5rem);
+  --padding-md: clamp(1.5rem, 6%, 3rem);
+  --padding-lg: clamp(3rem, 12%, 6rem);
+  --padding-xl: clamp(4rem, 16%, 8rem);
+
+  /* Standard measure for readable text */
+  --measure: 60ch;
+
+  /* Theme transition */
   --theme-transition: 0.2s ease-in-out;
   transition:
     background-color var(--theme-transition),
@@ -46,28 +64,4 @@
   --color-muted: #888888;
   --color-border: #404040;
   --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
-}
-
-/* Base styles */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  transition:
-    background-color var(--theme-transition),
-    color var(--theme-transition);
-}
-
-a {
-  color: var(--color-primary);
-  transition: color var(--theme-transition);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-secondary);
-  transition: color var(--theme-transition);
-}
-
-hr {
-  border-color: var(--color-border);
-  transition: border-color var(--theme-transition);
 }

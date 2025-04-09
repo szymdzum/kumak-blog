@@ -6,7 +6,7 @@ const getTheme = () => {
       return storedTheme;
     }
   }
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  if (globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
     return 'dark';
   }
   return 'light';
@@ -21,7 +21,7 @@ if (theme === 'light') {
   document.documentElement.setAttribute('data-theme', 'dark');
 }
 
-window.localStorage.setItem('theme', theme);
+globalThis.localStorage.setItem('theme', theme);
 
 // Handle theme toggle
 export const handleToggleClick = () => {
