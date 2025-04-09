@@ -6,48 +6,43 @@ body {
   min-height: 100vh;
   background-color: var(--color-bg);
   color: var(--color-text);
-  transition:
-    background-color var(--theme-transition),
-    color var(--theme-transition);
 }
 
-/* Main content */
 main {
   margin: 0 auto;
   width: 100%;
   padding: var(--padding-md);
 }
 
-/* Sticky footer */
 footer {
   margin-top: auto;
   padding: var(--padding-sm);
 }
 
-/* Basic elements */
-hr {
-  border-color: var(--color-border);
-  transition: border-color var(--theme-transition);
-}
-
-/* ===== Center Layout ===== */
 .center {
   box-sizing: content-box;
-  max-width: var(--max-width, var(--measure));
   margin-inline: auto;
+  max-width: var(--max-width, var(--measure));
   padding-inline: var(--padding, var(--s1));
 }
 
-.center.text-center {
-  text-align: center;
+/* ===== Imposter Layout ===== */
+.imposter {
+  --margin: 0px;
+
+  position: var(--positioning, absolute);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-.center.intrinsic {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.imposter.contain {
+  overflow: auto;
+  max-width: calc(100% - var(--margin) * 2);
+  max-height: calc(100% - var(--margin) * 2);
 }
 
-.center.intrinsic > * {
-  width: 100%;
+.imposter.fixed {
+  --positioning: fixed;
 }

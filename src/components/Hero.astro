@@ -2,26 +2,21 @@
 // src/components/HeroSection.astro
 // import GridBackground from "../components/GridBackground.astro";
 // import ArrowRight from "lucide-react/icons/arrow-right";
+import Button from "./Button.astro";
 ---
 
 <section class="hero">
-
   <div class="container">
-
-      <h1>
-        Crafting <span class="accent">elegant code</span> and sharing development insights
-      </h1>
-      <p>
-        A minimalist portfolio and blog focused on software development, coding repositories, and technical insights.
-      </p>
-      <div class="actions">
-        <a href="/projects" class="button primary">
-          View Projects
-        </a>
-        <a href="/blog" class="button secondary">
-          Read Blog
-        </a>
-
+    <h1>
+      Crafting <span class="accent">elegant code</span> and sharing development insights
+    </h1>
+    <p>
+      A minimalist portfolio and blog focused on software development, coding
+      repositories, and technical insights.
+    </p>
+    <div class="actions center">
+      <Button href="/projects" variant="primary">View Projects</Button>
+      <Button href="/blog" variant="secondary">Read Blog</Button>
     </div>
   </div>
 </section>
@@ -38,40 +33,18 @@
     z-index: 10;
     margin-inline: auto;
     padding-inline: var(--s1);
+    text-align: center;
+    max-width: 65ch;
   }
 
+  .actions {
+    display: flex;
+    gap: var(--s1);
+    margin-top: var(--s2);
+  }
 
-  .button {
-    display: inline-flex;
-    align-items: center;
+  .actions.center {
     justify-content: center;
-    height: var(--button-height-lg);
-    padding-inline: var(--s2);
-    font-weight: 500;
-    border-radius: var(--radius);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-  }
-
-  .button.primary {
-    background-color: var(--color-primary);
-    color: white;
-  }
-
-  .button.primary:hover {
-    background-color: var(--color-primary-dark);
-  }
-
-  .button.secondary {
-    background-color: transparent;
-    color: inherit;
-    border: 1px solid var(--color-border);
-  }
-
-  .button.secondary:hover {
-    background-color: rgba(var(--foreground-rgb), 0.05);
-    border-color: var(--color-border-hover);
   }
 
   .icon {
