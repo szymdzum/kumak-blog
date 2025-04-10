@@ -58,11 +58,7 @@
 
   /* Theme transition */
   --theme-transition: 0.2s ease-in-out;
-  transition:
-    background-color var(--theme-transition),
-    color var(--theme-transition),
-    border-color var(--theme-transition),
-    box-shadow var(--theme-transition);
+  transition: background-color var(--theme-transition), color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
 }
 
 /* Dark theme variables */
