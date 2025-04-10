@@ -1,3 +1,15 @@
 {
-  "deno.enable": true
+  "deno.enable": true,
+  "files.associations": {
+    "*.astro": "astro"
+  },
+  "editor.defaultFormatter": "astro-build.astro-vscode",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "css.validate": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

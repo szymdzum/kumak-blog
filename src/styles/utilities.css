@@ -40,7 +40,8 @@
 }
 
 /* Buttons */
-button, .button {
+button,
+.button {
   display: inline-block;
   padding: var(--s-1) var(--s1);
   background-color: var(--color-primary);
@@ -51,7 +52,8 @@ button, .button {
   transition: background-color var(--theme-transition);
 }
 
-button:hover, .button:hover {
+button:hover,
+.button:hover {
   background-color: color-mix(in srgb, var(--color-primary) 80%, black);
 }
 

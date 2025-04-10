@@ -1,12 +1,4 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
-
-// src/components/SiteHeader.astro
-// import Github from "lucide-react/icons/github"
-// import Menu from "lucide-react/icons/menu"
-
-// Navigation links configuration
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
@@ -20,12 +12,12 @@ const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
-<header class="site-header border-bottom bg-background-95">
+<header>
   <nav>
-    <a href="/" class="logo"><span class="logo-text">Code & Thoughts</span></a>
-
-    <!-- Desktop Navigation -->
-    <ul class="nav-links">
+    <a href="/" class="logo">
+      <span class="logo-text">Kumak</span>
+    </a>
+    <ul>
       {
         navLinks.map((link) => (
           <li>
@@ -33,7 +25,7 @@ const isActive = (href: string) =>
               href={link.href}
               class={
                 isActive(link.href)
-                  ? "active text-foreground"
+                  ? "active "
                   : "text-foreground-60 hover-text-foreground-80"
               }
             >
@@ -43,286 +35,58 @@ const isActive = (href: string) =>
         ))
       }
     </ul>
-
-    <!-- Mobile Navigation Button & Drawer -->
-    <div class="mobile-nav">
-      <button
-        id="mobile-menu-trigger"
-        class="menu-button"
-        aria-expanded="false"
-      >
-        Menu <span class="sr-only">Toggle Menu</span>
-      </button>
-
-      <div id="mobile-drawer" class="drawer" aria-hidden="true">
-        <div class="drawer-content">
-          <a href="/" class="logo"
-            ><span class="logo-text">Code & Thoughts</span></a
-          >
-          <ul class="nav-links">
-            {
-              navLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class={
-                      isActive(link.href)
-                        ? "active text-foreground"
-                        : "text-foreground-60 hover-text-foreground"
-                    }
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right-side actions -->
-    <div class="actions">
-      <a
-        href="https://github.com/szymdzum"
-        target="_blank"
-        rel="noreferrer"
-        class="button button-icon"
-      >
-        <span class="sr-only">GitHub</span>
-      </a>
-    </div>
   </nav>
 </header>
 
 <style>
-  /* Header Layout */
   header {
     position: sticky;
     top: 0;
     z-index: 50;
     width: 100%;
-    backdrop-filter: blur(var(--blur-amount));
-    display: flex;
-    justify-content: center;
+    background-color: rgb(var(--background-rgb));
+    border-bottom: 1px solid var(--color-border);
   }
 
-  header nav {
+  nav {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--s1);
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: var(--header-height);
+  }
+  ul {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     height: var(--header-height);
-    max-width: var(--container-width);
-    width: 100%;
-    padding-inline: var(--s1);
-  }
-
-  /* Navigation Links */
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    font-size: 0.875rem;
-    margin-left: 1.5rem;
+    gap: var(--s-1);
     list-style: none;
-    padding: 0;
   }
 
-  .nav-links li {
-    margin: 0;
-    padding: 0;
-  }
-  .nav-links a {
+  a {
     text-decoration: none;
-    transition: color 0.2s ease;
+    color: inherit;
   }
-  .nav-links a.active {
+
+  a:hover {
     color: rgb(var(--foreground-rgb));
   }
 
-  @media (max-width: 767px) {
-    .nav-links {
-      display: none;
-    }
+  a.active {
+    color: rgb(var(--foreground-rgb));
   }
 
-  /* Logo */
   .logo {
-    display: flex;
-    align-items: center;
     text-decoration: none;
     color: inherit;
   }
 
   .logo-text {
     font-weight: 700;
-  }
-
-  /* Mobile Navigation */
-  .mobile-nav {
-    display: none;
-  }
-  @media (max-width: 767px) {
-    .mobile-nav {
-      display: block;
-    }
-  }
-
-  .menu-button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: inherit;
-  }
-
-  .menu-button:hover {
-    background-color: transparent;
-  }
-
-  /* Drawer */
-  .drawer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80%;
-    max-width: 20rem;
-    height: 100vh;
-    background-color: rgb(var(--background-rgb));
-    box-shadow: var(--shadow-lg);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 100;
-    overflow-y: auto;
-  }
-
-  .drawer[aria-hidden="false"] {
-    transform: translateX(0);
-  }
-  .drawer-content {
-    padding: var(--s1);
-  }
-
-  .drawer-content .nav-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s1);
-    margin-top: var(--s2);
-  }
-
-  .drawer-content .nav-links a {
-    text-decoration: none;
-    color: rgba(var(--foreground-rgb), 0.6);
-    transition: color 0.2s ease;
-  }
-
-  .drawer-content .nav-links a:hover {
-    color: rgb(var(--foreground-rgb));
-  }
-  .drawer-content .nav-links a.active {
-    color: rgb(var(--foreground-rgb));
-  }
-
-  /* Drawer Overlay */
-  .drawer-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 99;
-  }
-
-  .drawer-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Right-side Actions */
-  .actions {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .button {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .button-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--icon-button-size, 2.5rem);
-    height: var(--icon-button-size, 2.5rem);
-    border-radius: var(--radius-sm);
-    background-color: transparent;
-  }
-
-  .button-icon:hover {
-    background-color: rgba(var(--foreground-rgb), 0.05);
+    font-size: 1.25rem;
   }
 </style>
-
-<script>
-  // Mobile menu handlers
-  const menuTrigger = document.getElementById("mobile-menu-trigger");
-  const drawer = document.getElementById("mobile-drawer");
-
-  // Create overlay element
-  const overlay = document.createElement("div");
-  overlay.className = "drawer-overlay";
-  document.body.appendChild(overlay);
-
-  // Toggle menu function
-  function toggleMenu() {
-    if (!drawer) return;
-    const isOpen = drawer.getAttribute("aria-hidden") === "false";
-    isOpen ? closeMenu() : openMenu();
-  }
-
-  // Open menu function
-  function openMenu() {
-    if (!drawer || !menuTrigger) return;
-    drawer.setAttribute("aria-hidden", "false");
-    menuTrigger.setAttribute("aria-expanded", "true");
-    overlay.classList.add("active");
-    document.body.style.overflow = "hidden"; // Prevent scrolling
-  }
-
-  // Close menu function
-  function closeMenu() {
-    if (!drawer || !menuTrigger) return;
-    drawer.setAttribute("aria-hidden", "true");
-    menuTrigger.setAttribute("aria-expanded", "false");
-    overlay.classList.remove("active");
-    document.body.style.overflow = ""; // Restore scrolling
-  }
-
-  // Event listeners
-  if (menuTrigger) menuTrigger.addEventListener("click", toggleMenu);
-  overlay.addEventListener("click", closeMenu);
-
-  // Close menu when clicking links or pressing Escape
-  if (drawer) {
-    drawer
-      .querySelectorAll("a")
-      .forEach((link) => link.addEventListener("click", closeMenu));
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (
-      drawer &&
-      e.key === "Escape" &&
-      drawer.getAttribute("aria-hidden") === "false"
-    ) {
-      closeMenu();
-    }
-  });
-</script>
