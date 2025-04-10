@@ -3,13 +3,9 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About" }
 ];
-
-// Get current pathname and helper function to check active links
 const { pathname } = Astro.url;
-const isActive = (href: string) =>
-  href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <header>
@@ -18,75 +14,60 @@ const isActive = (href: string) =>
       <span class="logo-text">Kumak</span>
     </a>
     <ul>
-      {
-        navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class={
-                isActive(link.href)
-                  ? "active "
-                  : "text-foreground-60 hover-text-foreground-80"
-              }
-            >
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
+      {navLinks.map(({ href, label }) => (
+        <li><a {href} class="nav-link">{label}</a></li>
+      ))}
     </ul>
   </nav>
 </header>
 
 <style>
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    width: 100%;
-    background-color: rgb(var(--background-rgb));
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  nav {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 var(--s1);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    height: var(--header-height);
-  }
-  ul {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: var(--header-height);
-    gap: var(--s-1);
-    list-style: none;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  a:hover {
-    color: rgb(var(--foreground-rgb));
-  }
-
-  a.active {
-    color: rgb(var(--foreground-rgb));
-  }
-
-  .logo {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .logo-text {
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgb(var(--background-rgb));
+  border-bottom: 1px solid var(--color-border);
+}
+nav {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--s1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+ul {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: rgb(var(--foreground-rgb));
+}
+.nav-link {
+  color: rgb(var(--foreground-60));
+}
+.logo {
+  text-decoration: none;
+  color: inherit;
+}
+.logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
 </style>
