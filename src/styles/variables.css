@@ -25,19 +25,26 @@
   --blur-amount: 10px;
 
   /* Layout variables */
-  --container-width: 1200px;
-  --header-height: 4rem;
+  --container-width: min(90%, 80ch);
+  --header-height: min(4rem, 10vh);
 
   /* Modular scale for spacing using a ratio of 1.5 */
   --ratio: 1.5;
   --s0: 1rem;
-  --s1: calc(var(--s0) * var(--ratio)); /* 1.5rem */
-  --s2: calc(var(--s1) * var(--ratio)); /* 2.25rem */
-  --s3: calc(var(--s2) * var(--ratio)); /* 3.375rem */
-  --s4: calc(var(--s3) * var(--ratio)); /* 5.063rem */
-  --s5: calc(var(--s4) * var(--ratio)); /* 7.594rem */
-  --s-1: calc(var(--s0) / var(--ratio)); /* 0.667rem */
-  --s-2: calc(var(--s-1) / var(--ratio)); /* 0.444rem */
+  --s1: calc(var(--s0) * var(--ratio));
+  /* 1.5rem */
+  --s2: calc(var(--s1) * var(--ratio));
+  /* 2.25rem */
+  --s3: calc(var(--s2) * var(--ratio));
+  /* 3.375rem */
+  --s4: calc(var(--s3) * var(--ratio));
+  /* 5.063rem */
+  --s5: calc(var(--s4) * var(--ratio));
+  /* 7.594rem */
+  --s-1: calc(var(--s0) / var(--ratio));
+  /* 0.667rem */
+  --s-2: calc(var(--s-1) / var(--ratio));
+  /* 0.444rem */
 
   /* Responsive padding using clamp */
   --padding-xs: clamp(0.5rem, 1.5%, 0.75rem);
@@ -51,11 +58,7 @@
 
   /* Theme transition */
   --theme-transition: 0.2s ease-in-out;
-  transition:
-    background-color var(--theme-transition),
-    color var(--theme-transition),
-    border-color var(--theme-transition),
-    box-shadow var(--theme-transition);
+  transition: background-color var(--theme-transition), color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
 }
 
 /* Dark theme variables */

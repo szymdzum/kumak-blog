@@ -53,8 +53,7 @@ ol[role='list'] {
 /* Preserve tab index focus styles */
 :focus-visible {
   --outline-size: max(2px, 0.15em);
-  outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid)
-    var(--outline-color, currentColor);
+  outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid) var(--outline-color, currentColor);
   outline-offset: var(--outline-offset, var(--outline-size));
 }
 
