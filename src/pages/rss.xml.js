@@ -1,4 +1,4 @@
-import rss from '@astrojs/rss';
+import rss from 'npm:@astrojs/rss@^4.0.11';
 import { getCollection } from 'astro:content';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts.ts';
 
