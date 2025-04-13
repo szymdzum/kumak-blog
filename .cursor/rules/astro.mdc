@@ -1,0 +1,356 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Astro Coding Agent Guidelines
+
+## Core Principles
+
+1. **Zero JavaScript by Default**
+   - DO: Build static content without JavaScript when possible
+   - DO: Use server-side rendering for content-focused pages
+   - DON'T: Add client-side JavaScript unless interactivity is required
+
+2. **Islands Architecture**
+   - DO: Isolate interactive components as "islands" in a sea of static HTML
+   - DO: Use appropriate client directives (`client:load`, `client:visible`, etc.)
+   - DON'T: Hydrate entire pages when only small sections need interactivity
+
+3. **Progressive Enhancement**
+   - DO: Ensure base functionality works without JavaScript
+   - DO: Add enhanced experiences for users with JavaScript enabled
+   - DON'T: Make critical features dependent on client-side code
+
+4. **Content-First Approach**
+   - DO: Use Content Collections for structured content
+   - DO: Implement proper schemas with zod for type safety
+   - DO: Optimize for content-rich websites
+
+## File Organization
+
+### Project Structure
+```
+src/
+├── components/  # UI components
+│   ├── common/  # Site-wide components
+│   └── feature/ # Feature-specific components
+├── layouts/     # Page templates
+├── pages/       # File-based routing
+├── content/     # Content collections
+├── styles/      # Global styles
+└── utils/       # Helper functions (.ts files only)
+    ├── format-date.ts
+    ├── validation-helpers.ts
+    └── api-client.ts
+```
+
+### Naming Conventions
+| Item | Convention | Example |
+|------|------------|---------|
+| Components | PascalCase | `NavBar.astro` |
+| Utilities | kebab-case | `format-date.ts` |
+| CSS Classes | kebab-case | `nav-links` |
+| Directories | kebab-case | `blog-posts/` |
+
+## Component Development
+
+### Component Template
+```astro
+---
+// 1. Imports
+import ComponentName from '../components/ComponentName.astro';
+
+// 2. Props with TypeScript types
+type Props = {
+  requiredProp: string;
+  optionalProp?: number;
+};
+
+// 3. Props with defaults
+const { 
+  requiredProp,
+  optionalProp = 0 
+} = Astro.props;
+
+// 4. Logic
+const computedValue = `${requiredProp}-${optionalProp}`;
+---
+
+<!-- 5. Component template -->
+<div class="component-wrapper">
+  <h2>{requiredProp}</h2>
+  <p>{computedValue}</p>
+  <slot />
+</div>
+
+<!-- 6. Scoped styles -->
+<style>
+  .component-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>
+```
+
+### DO
+- ✅ Define TypeScript types for props
+- ✅ Provide default values for optional props
+- ✅ Use semantic HTML elements
+- ✅ Include appropriate slots
+- ✅ Use component-scoped styles
+- ✅ Use only TypeScript (.ts) files for utilities
+
+### DON'T
+- ❌ Skip TypeScript type definitions
+- ❌ Leave props untyped
+- ❌ Use non-semantic elements (div soup)
+- ❌ Mix logic and presentation
+- ❌ Use global styles when component-scoped styles are sufficient
+- ❌ Use JavaScript (.js) files for utilities
+
+## HTML and Accessibility
+
+### DO
+- ✅ Use semantic HTML5 elements (`<article>`, `<section>`, `<nav>`)
+- ✅ Maintain proper heading hierarchy (h1 → h6)
+- ✅ Include ARIA attributes when necessary
+- ✅ Ensure color contrast minimum of 4.5:1
+- ✅ Add focus styles for interactive elements
+- ✅ Include descriptive alt text for all images
+- ✅ Support keyboard navigation
+
+### DON'T
+- ❌ Use generic divs when semantic elements exist
+- ❌ Skip heading levels or use headings for styling
+- ❌ Rely solely on color to convey information
+- ❌ Omit alt text for images
+- ❌ Create interactive elements without keyboard support
+
+## CSS Best Practices
+
+### DO
+- ✅ Use component-scoped styles by default
+- ✅ Implement design tokens with CSS custom properties
+- ✅ Use modern CSS features (Grid, Flexbox, Custom Properties)
+- ✅ Follow mobile-first responsive design
+- ✅ Maintain consistent spacing with design tokens
+
+### DON'T
+- ❌ Add unnecessary CSS frameworks
+- ❌ Use !important flags
+- ❌ Create deeply nested selectors
+- ❌ Use px for font sizes and spacing (prefer rem/em)
+- ❌ Duplicate styles across components
+
+### CSS Example
+```astro
+<style is:global>
+  /* Design tokens */
+  :root {
+    --color-primary: #4f46e5;
+    --color-text: #1f2937;
+    --spacing-base: 0.25rem;
+    --font-sans: system-ui, sans-serif;
+  }
+</style>
+
+<style>
+  /* Component-scoped CSS */
+  .card {
+    border-radius: 0.5rem;
+    padding: calc(var(--spacing-base) * 4);
+    background-color: white;
+  }
+  
+  /* Mobile-first approach */
+  @media (min-width: 768px) {
+    .card {
+      padding: calc(var(--spacing-base) * 6);
+    }
+  }
+</style>
+```
+
+## Framework Integration
+
+### When to Use Framework Components
+- For complex interactive UI (React, Vue, Svelte, etc.)
+- For components requiring state management
+- For features relying on framework-specific libraries
+
+### Client Directive Guide
+| Directive | When to Use |
+|-----------|------------|
+| `client:load` | Critical interactivity needed immediately |
+| `client:idle` | Can wait until browser is idle |
+| `client:visible` | Can wait until component is in viewport |
+| `client:media` | Only needed at certain breakpoints |
+| `client:only` | Client-side rendering only (no SSR) |
+
+### Framework Example
+```astro
+---
+import ReactCounter from '../components/ReactCounter.jsx';
+---
+
+<div>
+  <h1>Static Astro content</h1>
+  <!-- Only hydrate when visible in viewport -->
+  <ReactCounter client:visible startCount={0} />
+</div>
+```
+
+## Content Management
+
+### Content Collections
+```typescript
+// src/content/config.ts
+import { defineCollection, z } from 'astro:content';
+
+// Define types with Zod schemas for both blog and project posts
+export const collections = {
+  'blog': defineCollection({
+    schema: z.object({
+      title: z.string(),
+      date: z.date(),
+      author: z.string(),
+      tags: z.array(z.string()).optional(),
+      featured: z.boolean().optional().default(false)
+    })
+  }),
+  'projects': defineCollection({
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      publishDate: z.date(),
+      technologies: z.array(z.string()),
+      thumbnail: z.string(),
+      githubUrl: z.string().url().optional(),
+      liveUrl: z.string().url().optional(),
+      featured: z.boolean().optional().default(false)
+    })
+  })
+};
+```
+
+### Using Content Collections
+```typescript
+// src/pages/blog/index.astro
+---
+import { getCollection } from 'astro:content';
+
+// Type-safe data fetching with Zod validation
+const allBlogPosts = await getCollection('blog');
+const featuredPosts = allBlogPosts.filter(post => post.data.featured);
+---
+```
+
+### DO
+- ✅ Use Zod for schema validation in content collections
+- ✅ Define schemas for all collection types
+- ✅ Use type inference from Zod schemas instead of manual typing
+- ✅ Implement proper frontmatter for Markdown files
+- ✅ Organize related content into separate collections
+
+### DON'T
+- ❌ Use untyped data sources
+- ❌ Mix different content types in one collection
+- ❌ Skip schema validation
+- ❌ Hardcode content in components
+- ❌ Manually define types that Zod can infer
+
+## Image Optimization
+
+### Image Component Usage
+```astro
+---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/hero.jpg';
+---
+
+<Image 
+  src={heroImage} 
+  width={800} 
+  height={600} 
+  alt="Descriptive alt text" 
+  format="webp"
+/>
+```
+
+### DO
+- ✅ Always use Astro's `Image` component
+- ✅ Include width and height to prevent layout shifts
+- ✅ Use responsive images for different viewports
+- ✅ Prefer WebP format for better compression
+- ✅ Provide descriptive alt text
+
+### DON'T
+- ❌ Use raw `<img>` tags
+- ❌ Skip width/height attributes
+- ❌ Use oversized images
+- ❌ Omit alt text
+- ❌ Forget to optimize for mobile devices
+
+## Routing and SEO
+
+### Routing DO
+- ✅ Use file-based routing in the pages directory
+- ✅ Implement dynamic routes with proper error handling
+- ✅ Use view transitions for smoother navigation
+- ✅ Group related pages in subdirectories
+
+### SEO DO
+- ✅ Create a reusable SEO component
+- ✅ Include proper meta tags, OpenGraph, and Twitter cards
+- ✅ Implement canonical URLs
+- ✅ Add structured data/JSON-LD where appropriate
+- ✅ Create a sitemap using `@astrojs/sitemap`
+
+## Error Handling
+
+### DO
+- ✅ Implement error boundaries for interactive components
+- ✅ Add fallbacks for missing content or failed API calls
+- ✅ Use type-safe Content Collections to prevent errors
+- ✅ Validate user input properly
+- ✅ Consider server-side error handling with SSR
+
+### DON'T
+- ❌ Allow unhandled exceptions
+- ❌ Display technical error messages to users
+- ❌ Skip validation of external data
+- ❌ Ignore edge cases
+- ❌ Leave empty states unhandled
+
+## Performance Checklist
+
+- [ ] Minimize JavaScript with islands architecture
+- [ ] Implement image optimization with the `Image` component
+- [ ] Use appropriate loading strategies (`client:idle`, `client:visible`)
+- [ ] Enable view transitions for smoother navigation
+- [ ] Implement proper caching headers
+- [ ] Bundle CSS efficiently with scoped styles
+- [ ] Lazy-load off-screen content
+- [ ] Preload critical resources
+- [ ] Use partial hydration strategically
+
+## Build and Deployment
+
+### Configuration
+- Choose appropriate output mode (`static` or `server`)
+- Use environment variables for sensitive information
+- Set up proper caching strategies
+
+### Testing
+- Test on multiple browsers and devices
+- Verify all interactive components work as expected
+- Check accessibility with automated tools
+- Validate performance with Lighthouse
+
+### Deployment
+- Implement CI/CD for automated deployments
+- Add pre-rendering for dynamic routes when possible
+- Configure appropriate cache headers
+- Use a CDN for static assets
