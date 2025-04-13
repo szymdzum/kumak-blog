@@ -1,4 +1,12 @@
 {
+  "imports": {
+    "@deno/astro-adapter": "npm:@deno/astro-adapter"
+  },
+  "tasks": {
+    "dev": "deno run -A npm:astro@5.6.1 dev",
+    "build": "deno run -A npm:astro@5.6.1 build",
+    "preview": "deno run -A npm:astro@5.6.1 preview"
+  },
   "fmt": {
     "useTabs": false,
     "lineWidth": 180,
@@ -10,18 +18,5 @@
       "*.md"
     ]
   },
-  "nodeModulesDir": "auto",
-  "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run --allow-ffi --allow-sys npm:astro@^5.6.1 dev",
-    "build": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run --allow-ffi --allow-sys npm:astro@^5.6.1 build",
-    "preview": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run --allow-ffi --allow-sys npm:astro@^5.6.1 preview"
-  },
-  "deploy": {
-    "project": "a8246023-a10c-4a50-9a25-adc312f14421",
-    "exclude": [
-      "**/node_modules"
-    ],
-    "include": [],
-    "entrypoint": "dist/server/entry.mjs"
-  }
+  "nodeModulesDir": "auto"
 }
