@@ -1,0 +1,82 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Development Workflow
+Incremental Development
+
+✅ Break work into small, manageable steps
+✅ Complete and validate one task before moving to the next
+✅ After each step, explicitly confirm: "Is this what we are trying to achieve?"
+✅ Document decision points in code comments
+✅ Use commit messages that reference specific validations
+❌ Don't make multiple significant changes in a single step
+❌ Don't proceed to the next task without validating the current one
+
+Version Control
+
+✅ Use descriptive commit messages
+✅ Reference validation outcomes in commits
+✅ Keep commits focused on single concerns
+✅ Document incremental progress
+✅ Include validation steps in pull request descriptions
+
+Error Handling
+DO
+
+✅ Implement error boundaries for interactive components
+✅ Add fallbacks for missing content or failed API calls
+✅ Use type-safe Content Collections to prevent errors
+✅ Validate user input properly
+✅ Consider server-side error handling with SSR
+
+DON'T
+
+❌ Allow unhandled exceptions
+❌ Display technical error messages to users
+❌ Skip validation of external data
+❌ Ignore edge cases
+❌ Leave empty states unhandled
+
+Performance Checklist
+
+ Minimize JavaScript with islands architecture
+ Implement image optimization with the Image component
+ Use appropriate loading strategies (client:idle, client:visible)
+ Enable view transitions for smoother navigation
+ Implement proper caching headers
+ Bundle CSS efficiently with scoped styles
+ Lazy-load off-screen content
+ Preload critical resources
+ Use partial hydration strategically
+
+Build and Deployment
+Runtime Environment
+
+✅ Use Deno as the runtime environment for all server-side code
+✅ Configure Astro with Deno adapter when using SSR
+✅ Follow Deno's module import standards
+❌ Don't use Node.js-specific features or packages
+❌ Don't rely on npm scripts that aren't compatible with Deno
+
+Configuration
+typescript// astro.config.ts
+import { defineConfig } from 'astro/config';
+import deno from '@astrojs/deno';
+
+export default defineConfig({
+  output: 'server',
+  adapter: deno(),
+  vite: {
+    // Deno-specific Vite configuration
+  }
+});
+
+Development Workflow
+
+✅ Use incremental development with small, validated steps
+✅ After each step, validate the result matches the intended goal
+✅ Regularly ask: "Is this what we are trying to achieve?"
+✅ Document decision points and confirmations in code comments
+✅ Keep commits small and focused on specific changes
