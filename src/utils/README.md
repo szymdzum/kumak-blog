@@ -10,7 +10,7 @@ The `PostsManager` class provides a fluent API for working with blog posts. It u
 
 ```typescript
 import { getCollection } from 'astro:content';
-import { PostsManager, PostQueries } from '../utils/postSorter';
+import { PostQueries, PostsManager } from '../utils/postSorter';
 
 // Get all blog posts
 const allPosts = await getCollection('blog');
@@ -100,43 +100,43 @@ The `PostQueries` object contains constants for common filtering and sorting ope
 
 ```typescript
 // Sort by publish date (newest first)
-PostQueries.SORT.NEWEST_FIRST
+PostQueries.SORT.NEWEST_FIRST;
 
 // Sort by publish date (oldest first)
-PostQueries.SORT.OLDEST_FIRST
+PostQueries.SORT.OLDEST_FIRST;
 
 // Sort alphabetically by title (A-Z)
-PostQueries.SORT.ALPHABETICAL
+PostQueries.SORT.ALPHABETICAL;
 
 // Sort alphabetically by title (Z-A)
-PostQueries.SORT.REVERSE_ALPHA
+PostQueries.SORT.REVERSE_ALPHA;
 
 // Sort by update date
-PostQueries.SORT.RECENTLY_UPDATED
+PostQueries.SORT.RECENTLY_UPDATED;
 ```
 
 ### Filter Options
 
 ```typescript
 // No filtering (all posts)
-PostQueries.FILTER.ALL
+PostQueries.FILTER.ALL;
 
 // Only posts marked as featured
-PostQueries.FILTER.FEATURED
+PostQueries.FILTER.FEATURED;
 
 // Only posts with hero images
-PostQueries.FILTER.HAS_IMAGE
+PostQueries.FILTER.HAS_IMAGE;
 
 // Only posts published in the current year
-PostQueries.FILTER.PUBLISHED_THIS_YEAR
+PostQueries.FILTER.PUBLISHED_THIS_YEAR;
 ```
 
 ### Limit Constants
 
 ```typescript
-PostQueries.LIMIT.THREE  // 3 posts
-PostQueries.LIMIT.FIVE   // 5 posts
-PostQueries.LIMIT.TEN    // 10 posts
+PostQueries.LIMIT.THREE; // 3 posts
+PostQueries.LIMIT.FIVE; // 5 posts
+PostQueries.LIMIT.TEN; // 10 posts
 ```
 
 ## API Reference

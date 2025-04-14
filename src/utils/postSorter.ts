@@ -44,7 +44,7 @@ export const PostQueries = {
     /** Sort alphabetically by title, Z-A */
     REVERSE_ALPHA: 'title-desc' as SortOption,
     /** Sort by update date, most recently updated first */
-    RECENTLY_UPDATED: 'updated' as SortOption
+    RECENTLY_UPDATED: 'updated' as SortOption,
   },
 
   // Filter presets
@@ -59,7 +59,7 @@ export const PostQueries = {
     PUBLISHED_THIS_YEAR: ((post: CollectionEntry<'blog'>) => {
       const now = new Date();
       return post.data.pubDate.getFullYear() === now.getFullYear();
-    }) as PostFilterOption
+    }) as PostFilterOption,
   },
 
   // Common limits
@@ -69,8 +69,8 @@ export const PostQueries = {
     /** Limit to 5 posts */
     FIVE: 5,
     /** Limit to 10 posts */
-    TEN: 10
-  }
+    TEN: 10,
+  },
 };
 
 /**
@@ -117,7 +117,7 @@ export class PostsManager {
     let filteredPosts: CollectionEntry<'blog'>[];
 
     if (filterOption === 'featured') {
-      filteredPosts = this.posts.filter(post => post.data.featured === true);
+      filteredPosts = this.posts.filter((post) => post.data.featured === true);
     } else if (typeof filterOption === 'function') {
       filteredPosts = this.posts.filter(filterOption);
     } else {
@@ -143,9 +143,9 @@ export class PostsManager {
       return this;
     }
 
-    const filteredPosts = this.posts.filter(post => {
+    const filteredPosts = this.posts.filter((post) => {
       const postTags = post.data.tags || [];
-      return tags.some(tag => postTags.includes(tag));
+      return tags.some((tag) => postTags.includes(tag));
     });
 
     // Create a new instance of the same class
@@ -168,27 +168,19 @@ export class PostsManager {
 
     switch (sortBy) {
       case 'date-desc': // Newest first (default)
-        sortedPosts.sort((a, b) =>
-          b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-        );
+        sortedPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
         break;
 
       case 'date-asc': // Oldest first
-        sortedPosts.sort((a, b) =>
-          a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-        );
+        sortedPosts.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
         break;
 
       case 'title-asc': // Alphabetical A-Z
-        sortedPosts.sort((a, b) =>
-          a.data.title.localeCompare(b.data.title)
-        );
+        sortedPosts.sort((a, b) => a.data.title.localeCompare(b.data.title));
         break;
 
       case 'title-desc': // Alphabetical Z-A
-        sortedPosts.sort((a, b) =>
-          b.data.title.localeCompare(a.data.title)
-        );
+        sortedPosts.sort((a, b) => b.data.title.localeCompare(a.data.title));
         break;
 
       case 'updated': // Recently updated first
@@ -250,25 +242,31 @@ export class PostsManager {
    * });
    */
   query(options: PostQueryOptions = {}): CollectionEntry<'blog'>[] {
-    let manager = this;
+    // Helper function to conditionally apply a transformation
+    const applyIf = <T>(
+      condition: boolean,
+      transform: (instance: this) => this,
+      instance: this,
+    ): this => condition ? transform(instance) : instance;
 
-    if (options.filter) {
-      manager = manager.filter(options.filter);
-    }
-
-    if (options.tags) {
-      manager = manager.filterByTags(options.tags);
-    }
-
-    if (options.sortBy) {
-      manager = manager.sort(options.sortBy);
-    }
-
-    if (options.limit) {
-      manager = manager.limit(options.limit);
-    }
-
-    return manager.get();
+    // Apply all transformations in a chain, without storing 'this' in a variable
+    return applyIf(
+      !!options.limit,
+      (manager) => manager.limit(options.limit as number),
+      applyIf(
+        !!options.sortBy,
+        (manager) => manager.sort(options.sortBy as SortOption),
+        applyIf(
+          !!options.tags && options.tags.length > 0,
+          (manager) => manager.filterByTags(options.tags as string[]),
+          applyIf(
+            !!options.filter,
+            (manager) => manager.filter(options.filter as PostFilterOption),
+            this,
+          ),
+        ),
+      ),
+    ).get();
   }
 
   /**
@@ -286,7 +284,7 @@ export class PostsManager {
    */
   static query(
     posts: CollectionEntry<'blog'>[],
-    options: PostQueryOptions = {}
+    options: PostQueryOptions = {},
   ): CollectionEntry<'blog'>[] {
     return new PostsManager(posts).query(options);
   }
@@ -300,7 +298,7 @@ export class PostsManager {
   static getLatest(posts: CollectionEntry<'blog'>[], count: number = 3): CollectionEntry<'blog'>[] {
     return PostsManager.query(posts, {
       sortBy: PostQueries.SORT.NEWEST_FIRST,
-      limit: count
+      limit: count,
     });
   }
 
@@ -314,7 +312,7 @@ export class PostsManager {
     return PostsManager.query(posts, {
       filter: PostQueries.FILTER.FEATURED,
       sortBy: PostQueries.SORT.NEWEST_FIRST,
-      limit: count
+      limit: count,
     });
   }
 
@@ -329,7 +327,7 @@ export class PostsManager {
     return PostsManager.query(posts, {
       tags: [tag],
       sortBy: PostQueries.SORT.NEWEST_FIRST,
-      limit: count
+      limit: count,
     });
   }
 
@@ -342,7 +340,7 @@ export class PostsManager {
   static getRecentlyUpdated(posts: CollectionEntry<'blog'>[], count: number = 5): CollectionEntry<'blog'>[] {
     return PostsManager.query(posts, {
       sortBy: PostQueries.SORT.RECENTLY_UPDATED,
-      limit: count
+      limit: count,
     });
   }
 }

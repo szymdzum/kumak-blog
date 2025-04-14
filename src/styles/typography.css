@@ -142,7 +142,7 @@ pre code {
 }
 
 /* Flow utility for proper content spacing */
-.flow>*+* {
+.flow > * + * {
   margin-top: var(--s1);
 }
 
