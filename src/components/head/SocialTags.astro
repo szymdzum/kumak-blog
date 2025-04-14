@@ -1,25 +1,19 @@
 ---
-// Open Graph and Twitter card tags
-interface Props {
-  title: string;
-  description: string;
-  image: string;
-}
+import { siteConfig } from "@/site-config";
 
-const { title, description, image } = Astro.props;
-const imageUrl = new URL(image, Astro.site).href;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={imageUrl} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={siteConfig.name} />
+<meta property="og:description" content={siteConfig.description} />
+<meta property="og:image" content={siteConfig.image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={imageUrl} />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={siteConfig.name} />
+<meta property="twitter:description" content={siteConfig.description} />
+<meta property="twitter:image" content={siteConfig.image} />

@@ -1,21 +1,14 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import Projects from "../components/Projects.astro";
-import Featured from "../components/Featured.astro";
-import { siteConfig } from "../site-config";
+import Head from "@components/Head.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Projects from "@components/Projects.astro";
+import Featured from "@components/Featured.astro";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead
-      title={siteConfig.name}
-      description={siteConfig.description}
-      image="/social-image-home.jpg"
-    />
-  </head>
+  <Head />
   <body>
     <Header />
     <main>

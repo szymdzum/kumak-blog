@@ -1,10 +1,11 @@
+// Define the site configuration
 export const siteConfig = {
   // Site details
   name: "The Null Hypothesis",
   url: "https://kumak.dev",
   description: "A blog about technology, programming, and more",
   tagline: "Where decade of code meet moments of clarity.",
-
+  image: "/social-image-home.jpg",
   // Author/owner info
   author: "Kumak",
 
@@ -21,7 +22,10 @@ export const siteConfig = {
     { title: "Blog", href: "/blog" },
     { title: "About", href: "/about" },
   ]
-};
+} as const;
+
+// Infer the type from the object itself
+export type SiteConfig = typeof siteConfig;
 
 // Featured projects data
 export const featuredProjects = [

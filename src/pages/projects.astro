@@ -1,22 +1,13 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { siteConfig, featuredProjects } from "../site-config";
-import ProjectCard from "../components/ProjectCard.astro";
-
-const title = "Projects";
-const description = "A showcase of my coding projects and repositories";
+import Head from "@components/Head.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import { featuredProjects } from "@/site-config";
+import ProjectCard from "@components/ProjectCard.astro";
 ---
 
 <html lang="en">
-  <head>
-    <BaseHead
-      title={title}
-      description={description}
-      image="/social-image-projects.jpg"
-    />
-  </head>
+  <Head />
   <body>
     <Header />
     <main>

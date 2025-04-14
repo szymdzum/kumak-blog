@@ -1,13 +1,12 @@
 ---
 import Container from "./Container.astro";
 import Navigation from "./Navigation.astro";
-import Logo from "./Logo.astro";
 import Social from "./Social.astro";
 ---
 
 <header>
   <Container layout="row">
-    <Logo />
+    <!-- <Logo /> -->
     <Navigation />
     <Social />
   </Container>
@@ -21,12 +20,6 @@ import Social from "./Social.astro";
     padding: var(--padding-xs) 0;
     background-color: rgb(var(--background-rgb));
     border-bottom: 1px solid var(--color-border);
-  }
-
-  .header-content {
-    display: flex;
-    align-items: center;
-    width: 100%;
   }
 
   .row {
