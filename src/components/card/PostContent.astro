@@ -12,11 +12,11 @@ interface Props {
 const { post, showTitle = false } = Astro.props;
 ---
 
-<div class="card-excerpt">
+<div class="post-content stack">
   <h3 class="title">{post.data.title}</h3>
-  <p>{post.data.description}</p>
+  <p class="description">{post.data.description}</p>
   <div class="meta">
-    <Button href={`/blog/${post.id}`} variant="primary" size="sm">
+    <Button href={`/blog/${post.id}`} variant="mono" size="sm">
       Read more
     </Button>
     <FormattedDate date={post.data.pubDate} />
@@ -24,20 +24,24 @@ const { post, showTitle = false } = Astro.props;
 </div>
 
 <style>
-  .card-excerpt {
+  .post-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
-  .card-excerpt p {
+  .description {
     color: var(--color-muted, #94a3b8);
     margin: 0;
     font-size: var(--text-lg, 1.125rem);
-    line-height: 1.4;
+    line-height: 1.6;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    max-height: 5.4em; /* Allow 3 lines of text */
+    margin-top: var(--space-sm, 1rem);
   }
 
   .meta {
@@ -55,30 +59,31 @@ const { post, showTitle = false } = Astro.props;
     color: transparent;
     background: linear-gradient(
       135deg,
-      var(--color-primary, #3b82f6) 0%,
-      var(--color-secondary, #8b5cf6) 100%
+      rgba(255, 255, 255, 1) 0%,
+      rgba(180, 180, 180, 0.9) 100%
     );
     background-clip: text;
     -webkit-background-clip: text;
     letter-spacing: -0.02em;
     margin: 0;
-    margin-bottom: var(--space-lg, 2rem);
+    margin-bottom: var(--space-lg, 1.75rem);
     position: relative;
     transition: all 0.3s ease;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
   }
 
   .title::after {
     content: "";
     position: absolute;
-    bottom: -0.5rem;
+    bottom: -1rem;
     left: 0;
     width: 3rem;
     height: 0.25rem;
     background: linear-gradient(
       90deg,
-      var(--color-primary, #3b82f6),
-      var(--color-secondary, #8b5cf6)
+      rgba(255, 255, 255, 0.9),
+      rgba(180, 180, 180, 0.7)
     );
     border-radius: var(--radius-sm, 0.25rem);
     transition: width 0.3s ease;
@@ -91,5 +96,16 @@ const { post, showTitle = false } = Astro.props;
 
   .title:hover::after {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.75rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      -webkit-line-clamp: 4;
+    }
   }
 </style>

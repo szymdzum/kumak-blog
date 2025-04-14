@@ -7,7 +7,7 @@ interface Props {
   /** URL for anchor tag rendering. If provided, component renders as <a>, otherwise as <button> */
   href?: string;
   /** Visual style variant of the button */
-  variant?: "primary" | "secondary" | "outline" | "funky";
+  variant?: "primary" | "secondary" | "outline" | "funky" | "mono";
   /** Size variant affecting padding and font size */
   size?: "sm" | "md" | "lg";
   /** HTML button type attribute. Only applies when rendering as <button> */
@@ -133,6 +133,29 @@ const {
     box-shadow:
       0 6px 16px rgba(var(--foreground-rgb), 0.08),
       inset 0 0 0 1px rgba(var(--foreground-rgb), 0.1);
+  }
+
+  /* Monochromatic variant */
+  .mono {
+    background: linear-gradient(
+      135deg,
+      rgba(220, 220, 220, 0.9) 0%,
+      rgba(180, 180, 180, 0.8) 100%
+    );
+    color: rgba(30, 30, 30, 0.9);
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mono:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(240, 240, 240, 1) 0%,
+      rgba(200, 200, 200, 0.9) 100%
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   /* Funky variant */

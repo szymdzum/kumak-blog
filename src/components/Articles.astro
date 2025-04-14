@@ -9,16 +9,14 @@ const allPosts = await getCollection("blog");
 const latestPosts = PostsManager.getLatest(allPosts, limit);
 ---
 
-<section aria-labelledby="articles-heading">
-  <div class="stack">
-    {
-      latestPosts.map((post) => (
-        <article role="listitem" class="stack-lg">
-          <PostCard post={post} />
-        </article>
-      ))
-    }
-  </div>
+<section>
+  {
+    latestPosts.map((post) => (
+      <article role="listitem" class="stack-lg">
+        <PostCard post={post} />
+      </article>
+    ))
+  }
 </section>
 
 <style>
@@ -29,15 +27,5 @@ const latestPosts = PostsManager.getLatest(allPosts, limit);
     margin-top: var(--s3);
     margin-bottom: var(--s3);
     padding: var(--s3);
-    background-color: var(--color-border);
-  }
-
-  .posts-stack {
-    display: flex;
-    flex-direction: column;
-  }
-
-  article:not(:last-child) {
-    margin-bottom: var(--space-sm);
   }
 </style>

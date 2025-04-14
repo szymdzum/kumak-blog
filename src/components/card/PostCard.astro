@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Excerpt from "./Excerpt.astro";
+import PostContent from "./PostContent.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -11,7 +11,7 @@ const { post } = Astro.props;
 
 <article class="card">
   <div class="content">
-    <Excerpt post={post} showTitle={true} />
+    <PostContent post={post} showTitle={true} />
     <div class="feature-image">
       <img
         src={post.data.heroImage || "/blog-placeholder-1.jpg"}
