@@ -8,7 +8,7 @@ type PathnameResult = {
  * @param url - The URL to extract pathname from
  */
 export const getPathname = (url: URL): PathnameResult => {
-  const pathname = url.pathname.replace(import.meta.env.BASE_URL, "");
+  const pathname = url.pathname.replace(import.meta.env.BASE_URL, '');
   const subpath = pathname.match(/[^\/]+/g);
 
   return { pathname, subpath };

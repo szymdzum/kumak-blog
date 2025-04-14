@@ -30,19 +30,29 @@ footer {
   padding-inline: var(--padding, var(--s1));
 }
 
-/* Stack utility - adds vertical spacing between children */
+.flexbox-row {
+  --min: 20ch;
+  --gap: 1.5rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+
+  >* {
+    flex: 1 1 var(--min);
+  }
+}
+
 .stack>*+* {
   margin-top: var(--s1);
 }
 
-/* Box utility - adds padding */
 .box {
   padding: var(--s1);
   border-radius: 4px;
   background-color: var(--color-bg);
   border: 1px solid var(--color-border);
 }
-
 
 .sr-only {
   position: absolute;

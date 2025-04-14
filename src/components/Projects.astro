@@ -27,25 +27,6 @@ import { featuredProjects } from "../site-config";
 </section>
 
 <style>
-  /*
- * Responsive Flexbox Grid
- * Flexbox  has different behavior for the last row (items expand to fill available space)
- */
-  .flexbox-row {
-    --min: 20ch;
-    /* Minimum item width before wrapping */
-    --gap: 1rem;
-    /* Gap between flex items */
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap);
-
-    > * {
-      flex: 1 1 var(--min);
-    }
-  }
-
   .view-all {
     margin-top: var(--s2);
     text-align: center;
