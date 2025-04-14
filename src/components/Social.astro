@@ -36,12 +36,13 @@ import { siteConfig } from "../site-config";
   }
 
   a {
-    color: var(--color-text, currentColor);
-    transition: color 0.2s ease;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
   }
 
   a:hover {
-    color: var(--color-primary, #4a5568);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
   .icon {
