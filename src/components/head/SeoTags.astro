@@ -1,0 +1,15 @@
+---
+// SEO-specific meta tags
+interface Props {
+  title: string;
+  description: string;
+  canonicalURL: URL;
+}
+
+const { title, description, canonicalURL } = Astro.props;
+---
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />

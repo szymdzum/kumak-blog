@@ -1,20 +1,28 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts.ts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "@components/BaseHead.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { siteConfig } from "@/site-config";
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+type BlogPost = CollectionEntry<"blog">;
+
+const posts = (await getCollection("blog")).sort(
+  (a: BlogPost, b: BlogPost) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={siteConfig.name}
+      description={siteConfig.description}
+      image="/social-image-blog.jpg"
+    />
   </head>
   <body>
     <Header />
@@ -23,7 +31,7 @@ const posts = (await getCollection('blog')).sort(
         <h1 class="page-title">Blog</h1>
         <div class="posts-grid">
           {
-            posts.map((post) => (
+            posts.map((post: BlogPost) => (
               <article class="post-card">
                 <div class="image-container">
                   {post.data.heroImage ? (
@@ -85,7 +93,9 @@ const posts = (await getCollection('blog')).sort(
         border: 1px solid var(--color-border, #e2e8f0);
         border-radius: var(--radius, 0.5rem);
         overflow: hidden;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
         height: 100%;
       }
 
@@ -199,7 +209,10 @@ const posts = (await getCollection('blog')).sort(
       }
 
       .read-more-link:hover {
-        background-color: var(--color-primary-bg-hover, rgba(52, 144, 220, 0.2));
+        background-color: var(
+          --color-primary-bg-hover,
+          rgba(52, 144, 220, 0.2)
+        );
       }
 
       @media (max-width: 640px) {
