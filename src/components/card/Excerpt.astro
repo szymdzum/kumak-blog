@@ -47,17 +47,16 @@ const excerpt = createExcerpt(post, maxLength);
 
 <style>
   .card-excerpt {
-    padding: 0 var(--s1, 1rem);
     flex-grow: 1;
   }
 
   .card-excerpt p {
     color: var(--color-muted, #64748b);
     margin: 0;
-    line-height: 1.5;
+    line-height: var(--ratio, 1.5);
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: var(--excerpt-lines, 3);
   }
 </style>

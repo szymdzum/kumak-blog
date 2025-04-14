@@ -8,22 +8,20 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<footer class="card-footer">
+<footer>
   <div class="read-more">
     <a href={`/blog/${post.id}`} class="read-more-link"> Read more </a>
   </div>
 </footer>
 
 <style>
-  .card-footer {
+  footer {
     display: flex;
     justify-content: flex-end;
-    padding: var(--s1, 1rem);
-    padding-top: var(--s-1, 0.5rem);
     margin-top: auto;
   }
 
-  .read-more-link {
+  a {
     display: inline-flex;
     align-items: center;
     font-size: 0.875rem;
@@ -36,7 +34,7 @@ const { post } = Astro.props;
     transition: background-color 0.2s ease;
   }
 
-  .read-more-link:hover {
+  a:hover {
     background-color: var(--color-primary-bg-hover, rgba(52, 144, 220, 0.2));
   }
 </style>

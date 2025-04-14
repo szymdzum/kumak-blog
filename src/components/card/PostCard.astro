@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Header from "./Header.astro";
+import Excerpt from "./Excerpt.astro";
+import Footer from "./Footer.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  maxExcerptLength?: number;
+}
+
+const { post, maxExcerptLength = 160 } = Astro.props;
+---
+
+<article class="box">
+  <Header post={post} />
+  <Excerpt post={post} maxLength={maxExcerptLength} />
+  <Footer post={post} />
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: var(--radius, 0.25rem);
+    background-color: var(--color-card-bg, #ffffff);
+    box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    height: 100%;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  }
+</style>

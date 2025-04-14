@@ -35,6 +35,24 @@ a:not([class]) {
   text-underline-offset: 0.15em;
 }
 
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  text-decoration: none;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  text-decoration: underline;
+}
+
 /* Typography */
 h1,
 h2,
@@ -124,7 +142,7 @@ pre code {
 }
 
 /* Flow utility for proper content spacing */
-.flow > * + * {
+.flow>*+* {
   margin-top: var(--s1);
 }
 

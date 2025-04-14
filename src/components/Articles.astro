@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import { PostsManager } from "../utils/postSorter";
+import PostCard from "./card/PostCard.astro";
+
+const title = "Latest Posts";
+const limit = 9;
+const allPosts = await getCollection("blog");
+const latestPosts = PostsManager.getLatest(allPosts, limit);
+---
+
+<section aria-labelledby="articles-heading">
+  <h2>{title}</h2>
+  {
+    latestPosts.map((post) => (
+      <article role="listitem">
+        <PostCard post={post} />
+      </article>
+    ))
+  }
+</section>
