@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import FormattedDate from "@components/ui/FormattedDate.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -13,5 +12,4 @@ const { post } = Astro.props;
   <h3>
     <a href={`/blog/${post.id}`}>{post.data.title}</a>
   </h3>
-  <FormattedDate date={post.data.pubDate} />
 </header>

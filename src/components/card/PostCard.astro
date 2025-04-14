@@ -1,39 +1,63 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Header from "./Header.astro";
 import Excerpt from "./Excerpt.astro";
-import Footer from "./Footer.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
-  maxExcerptLength?: number;
 }
 
-const { post, maxExcerptLength = 160 } = Astro.props;
+const { post } = Astro.props;
 ---
 
-<article class="box">
-  <Header post={post} />
-  <Excerpt post={post} maxLength={maxExcerptLength} />
-  <Footer post={post} />
+<article class="card">
+  <div class="content">
+    <Excerpt post={post} showTitle={true} />
+    <div class="feature-image">
+      <img
+        src={post.data.heroImage || "/blog-placeholder-1.jpg"}
+        alt={post.data.title}
+      />
+    </div>
+  </div>
 </article>
 
 <style>
   .card {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
     border-radius: var(--radius, 0.25rem);
-    background-color: var(--color-card-bg, #ffffff);
-    box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-    height: 100%;
+    transition: transform 0.2s ease;
+    margin-bottom: var(--s3);
   }
 
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+  .content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-lg, 2rem);
+    margin-top: var(--space-lg, 2rem);
+    align-items: start;
+  }
+
+  .feature-image {
+    overflow: hidden;
+    border-radius: var(--radius, 0.25rem);
+    aspect-ratio: 4/3;
+  }
+
+  .feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .feature-image img {
+    transform: scale(1.05);
+  }
+
+  /* Responsive layout */
+  @media (max-width: 768px) {
+    .content {
+      grid-template-columns: 1fr;
+      gap: var(--space-md, 1rem);
+    }
   }
 </style>

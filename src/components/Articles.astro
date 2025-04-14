@@ -10,12 +10,34 @@ const latestPosts = PostsManager.getLatest(allPosts, limit);
 ---
 
 <section aria-labelledby="articles-heading">
-  <h2>{title}</h2>
-  {
-    latestPosts.map((post) => (
-      <article role="listitem">
-        <PostCard post={post} />
-      </article>
-    ))
-  }
+  <div class="stack">
+    {
+      latestPosts.map((post) => (
+        <article role="listitem" class="stack-lg">
+          <PostCard post={post} />
+        </article>
+      ))
+    }
+  </div>
 </section>
+
+<style>
+  section {
+    width: 100%;
+    max-width: 100ch;
+    margin: 0 auto;
+    margin-top: var(--s3);
+    margin-bottom: var(--s3);
+    padding: var(--s3);
+    background-color: var(--color-border);
+  }
+
+  .posts-stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  article:not(:last-child) {
+    margin-bottom: var(--space-sm);
+  }
+</style>

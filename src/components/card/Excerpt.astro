@@ -1,62 +1,95 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@components/ui/FormattedDate.astro";
+import Button from "@components/ui/Button.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
+  showTitle?: boolean;
   maxLength?: number;
 }
 
-const { post, maxLength = 160 } = Astro.props;
-
-// Create excerpt from description or content
-function createExcerpt(
-  post: CollectionEntry<"blog">,
-  maxLength: number,
-): string {
-  // Use the description if available
-  let excerpt = post.data.description;
-
-  // If no description and body is available, use first part of content
-  if (!excerpt && post.body) {
-    excerpt = post.body
-      .replace(/\n/g, " ") // Replace newlines with spaces
-      .replace(/[#*~`_]+/g, "") // Remove markdown formatting
-      .replace(/\s{2,}/g, " ") // Normalize spaces
-      .trim();
-  }
-
-  // Use fallback if still no excerpt
-  if (!excerpt) {
-    return "Read more about this post...";
-  }
-
-  // Truncate to maxLength
-  if (excerpt.length > maxLength) {
-    excerpt = excerpt.substring(0, maxLength).trim() + "...";
-  }
-
-  return excerpt;
-}
-
-const excerpt = createExcerpt(post, maxLength);
+const { post, showTitle = false } = Astro.props;
 ---
 
 <div class="card-excerpt">
-  <p>{excerpt}</p>
+  <h3 class="title">{post.data.title}</h3>
+  <p>{post.data.description}</p>
+  <div class="meta">
+    <Button href={`/blog/${post.id}`} variant="primary" size="sm">
+      Read more
+    </Button>
+    <FormattedDate date={post.data.pubDate} />
+  </div>
 </div>
 
 <style>
   .card-excerpt {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .card-excerpt p {
-    color: var(--color-muted, #64748b);
+    color: var(--color-muted, #94a3b8);
     margin: 0;
-    line-height: var(--ratio, 1.5);
+    font-size: var(--text-lg, 1.125rem);
+    line-height: 1.4;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--excerpt-lines, 3);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: var(--space-lg, 2rem);
+    gap: var(--space-md, 1rem);
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary, #3b82f6) 0%,
+      var(--color-secondary, #8b5cf6) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    letter-spacing: -0.02em;
+    margin: 0;
+    margin-bottom: var(--space-lg, 2rem);
+    position: relative;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .title::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 3rem;
+    height: 0.25rem;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary, #3b82f6),
+      var(--color-secondary, #8b5cf6)
+    );
+    border-radius: var(--radius-sm, 0.25rem);
+    transition: width 0.3s ease;
+  }
+
+  .title:hover {
+    transform: translateY(-1px);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .title:hover::after {
+    width: 100%;
   }
 </style>

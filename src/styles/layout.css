@@ -47,6 +47,10 @@ footer {
   margin-top: var(--s1);
 }
 
+.stack-sm > * + * {
+  margin-top: var(--s0);
+}
+
 .box {
   padding: var(--s1);
   border-radius: 4px;
