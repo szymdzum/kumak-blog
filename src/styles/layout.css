@@ -29,3 +29,29 @@ footer {
   max-width: var(--max-width, var(--measure));
   padding-inline: var(--padding, var(--s1));
 }
+
+/* Stack utility - adds vertical spacing between children */
+.stack>*+* {
+  margin-top: var(--s1);
+}
+
+/* Box utility - adds padding */
+.box {
+  padding: var(--s1);
+  border-radius: 4px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
