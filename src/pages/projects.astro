@@ -1,0 +1,87 @@
+---
+import Head from "@components/Head.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+
+import { featuredProjects } from "@/site-config";
+---
+
+<!doctype html>
+<html lang="en">
+  <Head />
+  <body>
+    <Header />
+    <main>
+      <section class="projects-page">
+        <div class="container">
+          <h1>Projects</h1>
+          <p class="subtitle">
+            A collection of my coding projects and open-source contributions
+          </p>
+
+          <div class="projects-grid">
+            {
+              featuredProjects.map((project) => (
+                <ProjectCard
+                  title={project.title}
+                  description={project.description}
+                  tags={project.tags}
+                  githubUrl={project.githubUrl}
+                  demoUrl={project.demoUrl}
+                />
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .projects-page {
+    padding: var(--s3) 0;
+  }
+
+  .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--s2);
+  }
+
+  h1 {
+    font-size: var(--s3);
+    font-weight: 700;
+    margin-bottom: var(--s1);
+  }
+
+  .subtitle {
+    color: var(--color-muted);
+    margin-bottom: var(--s3);
+    max-width: 65ch;
+  }
+
+  .projects-grid {
+    display: grid;
+    gap: var(--s2);
+    margin-top: var(--s3);
+  }
+
+  @media (min-width: 640px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    h1 {
+      font-size: var(--s4);
+    }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+import { siteConfig } from "@/site-config";
+import { isPathActive } from "@/utils/path";
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav aria-label="Main navigation">
+  <ul role="menubar">
+    {
+      siteConfig.navItems.map(({ href, title }) => (
+        <li role="none">
+          <a
+            href={href}
+            role="menuitem"
+            class="text-lg"
+            aria-current={isPathActive(currentPath, href) ? "page" : undefined}
+          >
+            {title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+  }
+
+  ul {
+    display: flex;
+    gap: var(--s1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    position: relative;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--s-1) 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  a:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  a:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+  }
+
+  a[aria-current="page"] {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  a[aria-current="page"]::after {
+    content: none;
+  }
+</style>

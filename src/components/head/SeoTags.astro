@@ -1,0 +1,10 @@
+---
+import { siteConfig } from "@/site-config";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<title>{siteConfig.name}</title>
+<meta name="title" content={siteConfig.name} />
+<meta name="description" content={siteConfig.description} />
+<link rel="canonical" href={canonicalURL} />

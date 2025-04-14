@@ -1,0 +1,42 @@
+---
+interface Props {
+  layout?: "row" | "column";
+  as?: string;
+  class?: string;
+}
+
+const {
+  layout = "row",
+  as: Element = "div",
+  class: className = "",
+} = Astro.props;
+---
+
+<Element
+  class={`container ${layout === "row" ? "row" : "column"} ${className}`}
+>
+  <slot />
+</Element>
+
+<style>
+  .container {
+    display: flex;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--s2);
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

@@ -2,16 +2,17 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import deno from '@deno/astro-adapter';
+import deno from '@astrojs/deno';
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://kumak.dev',
   output: 'server',
   adapter: deno(),
   integrations: [mdx(), sitemap()],
   image: {
     service: {
-      entrypoint: 'astro/assets/services/noop',
+      entrypoint: 'astro/assets/services/sharp',
     },
   },
 });

@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<header class="stack">
+  <h3>
+    <a href={`/blog/${post.id}`}>{post.data.title}</a>
+  </h3>
+</header>

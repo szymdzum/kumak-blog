@@ -1,89 +1,91 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import { render } from 'astro:content';
-// import ArrowLeft from "lucide-react/icons/arrow-left";
+import { type CollectionEntry, getCollection } from "astro:content";
+import { render } from "astro:content";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  const posts = await getCollection("blog");
+  return posts.map((post: CollectionEntry<"blog">) => ({
     params: { slug: post.id },
     props: post,
   }));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+const post = Astro.props as CollectionEntry<"blog">;
 const { Content } = await render(post);
 
-// Format the post data to match the template
 const formattedPost = {
   title: post.data.title,
-  date: post.data.pubDate?.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }) || '',
+  date:
+    post.data.pubDate?.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }) || "",
   tags: [] as string[],
-  content: '',  // Will be rendered by <Content />
+  content: "", // Will be rendered by <Content />
 };
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{post.data.title}</title>
-  <meta name="description" content={post.data.description}>
-</head>
-<body>
-  <article class="blog-post">
-    <div class="container">
-      {post.data.heroImage && (
-        <div class="hero-image">
-          <img src={post.data.heroImage} alt={post.data.title} />
-        </div>
-      )}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{post.data.title}</title>
+    <meta name="description" content={post.data.description} />
+  </head>
+  <body>
+    <article class="blog-post">
+      <div class="container">
+        {
+          post.data.heroImage && (
+            <div class="hero-image">
+              <img src={post.data.heroImage} alt={post.data.title} />
+            </div>
+          )
+        }
 
-      <div class="post-container">
-        <header class="post-header">
-          <a href="/blog" class="back-link">
-            <!-- <ArrowLeft /> -->
-            Back to Blog
-          </a>
-          <h1>{formattedPost.title}</h1>
+        <div class="post-container">
+          <header class="post-header">
+            <a href="/blog" class="back-link"> Back to Blog </a>
+            <h1>{formattedPost.title}</h1>
 
-          <div class="post-meta">
-            <time datetime={post.data.pubDate?.toISOString()}>{formattedPost.date}</time>
-            {formattedPost.tags.length > 0 && (
-              <>
-                <span class="separator">•</span>
-                <div class="tags">
-                  {formattedPost.tags.map((tag: string) => (
-                    <span class="tag">{tag}</span>
-                  ))}
-                </div>
-              </>
-            )}
+            <div class="post-meta">
+              <time datetime={post.data.pubDate?.toISOString()}
+                >{formattedPost.date}
+              </time>
+              {
+                formattedPost.tags.length > 0 && (
+                  <>
+                    <span class="separator">•</span>
+                    <div class="tags">
+                      {formattedPost.tags.map((tag: string) => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  </>
+                )
+              }
+            </div>
+          </header>
+
+          <div class="prose">
+            <Content />
           </div>
-        </header>
-
-        <div class="prose">
-          <Content />
         </div>
       </div>
-    </div>
-  </article>
-</body>
+    </article>
+  </body>
 </html>
 
 <style is:global>
   /* Global styles for markdown content */
   :root {
     --prose-width: 65ch;
-    --prose-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --prose-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, sans-serif;
     --prose-text: #374151;
     --prose-bg: #ffffff;
     --prose-headings: #111827;
@@ -196,7 +198,7 @@ const formattedPost = {
 
   h1 {
     margin-bottom: var(--s1, 1rem);
-    font-size: var(--s3, 2rem);
+    font-size: var(--s4, 3rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -205,7 +207,7 @@ const formattedPost = {
 
   @media (min-width: 640px) {
     h1 {
-      font-size: var(--s4, 2.5rem);
+      font-size: var(--s5, 3.5rem);
     }
   }
 
@@ -377,7 +379,8 @@ const formattedPost = {
     padding: 0.2em 0.4em;
     border-radius: 0.25em;
     font-size: 0.875em;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
   }
 
   .prose :global(pre) {

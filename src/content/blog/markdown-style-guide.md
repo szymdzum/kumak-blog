@@ -1,6 +1,6 @@
 ---
-title: 'The Comprehensive Markdown Reference Guide: Syntax, Examples, and Best Practices'
-description: 'Master the art of Markdown formatting with this definitive guide. Learn how to structure content with headings, format text, create lists, add images, and implement advanced features like tables and code blocks. Perfect for content creators, developers, and technical writers who want to produce beautifully formatted documentation.'
+title: 'The Comprehensive Markdown Reference Guide'
+description: 'Master the art of Markdown formatting with this definitive guide. Learn how to structure content with headings, format text, create lists, add images, and implement advanced features like tables and code blocks.'
 pubDate: 'Jun 19 2024'
 heroImage: '/blog-placeholder-1.jpg'
 ---

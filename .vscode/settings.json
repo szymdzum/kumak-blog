@@ -5,11 +5,14 @@
   },
   "editor.defaultFormatter": "denoland.vscode-deno",
   "[astro]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "astro-build.astro-vscode"
   },
   "css.validate": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
   }
 }
