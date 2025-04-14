@@ -1,0 +1,32 @@
+---
+interface Props {
+  centerContent?: boolean;
+  as?: string;
+  class?: string;
+}
+
+const {
+  centerContent = false,
+  as: Element = "div",
+  class: className = "",
+} = Astro.props;
+---
+
+<Element class={`container ${centerContent ? "center" : ""} ${className}`}>
+  <slot />
+</Element>
+
+<style>
+  .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--s2);
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

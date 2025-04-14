@@ -6,7 +6,7 @@ import deno from '@astrojs/deno';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://kumak.dev',
   output: 'server',
   adapter: deno(),
   integrations: [mdx(), sitemap()],

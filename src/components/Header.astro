@@ -1,73 +1,23 @@
 ---
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" }
-];
-const { pathname } = Astro.url;
+import Container from "./Container.astro";
+import Navigation from "./Navigation.astro";
+import Logo from "./Logo.astro";
 ---
 
 <header>
-  <nav>
-    <a href="/" class="logo">
-      <span class="logo-text">Kumak</span>
-    </a>
-    <ul>
-      {navLinks.map(({ href, label }) => (
-        <li><a {href} class="nav-link">{label}</a></li>
-      ))}
-    </ul>
-  </nav>
+  <Container centerContent>
+    <Navigation />
+    <Logo />
+  </Container>
 </header>
 
 <style>
-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  width: 100%;
-  background-color: rgb(var(--background-rgb));
-  border-bottom: 1px solid var(--color-border);
-}
-nav {
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 var(--s1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--header-height);
-}
-ul {
-  display: flex;
-  align-items: center;
-  gap: var(--s1);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-li {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
-a:hover {
-  color: rgb(var(--foreground-rgb));
-}
-.nav-link {
-  color: rgb(var(--foreground-60));
-}
-.logo {
-  text-decoration: none;
-  color: inherit;
-}
-.logo-text {
-  font-weight: 700;
-  font-size: 1.25rem;
-}
+  header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    padding: var(--padding-xs) 0;
+    background-color: rgb(var(--background-rgb));
+    border-bottom: 1px solid var(--color-border);
+  }
 </style>

@@ -4,20 +4,46 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Projects from "../components/Projects.astro";
 import Featured from "../components/Featured.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts.ts";
+import { siteConfig } from "../site-config";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={siteConfig.name} description={siteConfig.description} />
   </head>
   <body>
     <Header />
     <main>
       <Projects />
-      <Featured />
+      <section class="featured-section">
+        <div class="container">
+          <h2 class="section-title">Latest Articles</h2>
+          <Featured />
+        </div>
+      </section>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  .featured-section {
+    padding: var(--s4) 0;
+    background-color: rgba(var(--foreground-rgb), 0.02);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--s2);
+  }
+
+  .section-title {
+    font-size: var(--s3);
+    font-weight: 700;
+    margin-bottom: var(--s3);
+    text-align: center;
+  }
+</style>
