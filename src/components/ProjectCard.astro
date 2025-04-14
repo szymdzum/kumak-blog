@@ -12,10 +12,9 @@ const { title, description, tags, githubUrl, demoUrl } = Astro.props;
 ---
 
 <div class="project-card">
-  <div class="card-content">
+  <div class="card-content stack">
     <h3>{title}</h3>
     <p class="description">{description}</p>
-
     <div class="tags">
       {tags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
@@ -86,15 +85,17 @@ const { title, description, tags, githubUrl, demoUrl } = Astro.props;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
     background-color: #1a1a1a;
     border-radius: 12px;
     overflow: hidden;
-    height: 100%;
+    padding: var(--padding-xs);
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 0;
   }
 
   .project-card:hover {
@@ -103,8 +104,10 @@ const { title, description, tags, githubUrl, demoUrl } = Astro.props;
   }
 
   .card-content {
-    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    padding: 1.5rem;
   }
 
   h3 {
@@ -115,6 +118,11 @@ const { title, description, tags, githubUrl, demoUrl } = Astro.props;
   }
 
   .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 4.5rem;
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.95rem;
     line-height: 1.5;

@@ -5,7 +5,7 @@ import { siteConfig } from "@/site-config";
 <section class="hero">
   <div class="hero-content">
     <h1>{siteConfig.name}</h1>
-    <p class="tagline">{siteConfig.tagline}</p>
+    <p class="">{siteConfig.tagline}</p>
   </div>
 </section>
 
@@ -22,23 +22,13 @@ import { siteConfig } from "@/site-config";
   }
 
   .hero-content {
-    max-width: 980px;
-    margin-inline: auto;
     display: flex;
+    margin-inline: auto;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--s1);
   }
 
-  h1 {
-    font-size: var(--s3);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-  }
-
-  .hero .tagline {
-    font-size: var(--s1);
+  .tagline {
     color: var(--color-muted);
     max-width: 40ch;
   }
@@ -53,14 +43,6 @@ import { siteConfig } from "@/site-config";
   @media (min-width: 768px) {
     .hero {
       padding: var(--s5) var(--s1);
-    }
-
-    .hero h1 {
-      font-size: var(--s4);
-    }
-
-    .hero .tagline {
-      font-size: var(--s2);
     }
   }
 </style>

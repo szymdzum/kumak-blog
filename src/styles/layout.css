@@ -38,12 +38,12 @@ footer {
   flex-wrap: wrap;
   gap: var(--gap);
 
-  >* {
+  > * {
     flex: 1 1 var(--min);
   }
 }
 
-.stack>*+* {
+.stack > * + * {
   margin-top: var(--s1);
 }
 

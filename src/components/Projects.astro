@@ -1,11 +1,11 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
-import Button from "./Button.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import Button from "@components/ui/Button.astro";
 import { featuredProjects } from "../site-config";
 ---
 
 <section>
-  <div class="flexbox-row">
+  <div class="projects-grid">
     {
       featuredProjects
         .filter((project) => project.featured)
@@ -22,13 +22,22 @@ import { featuredProjects } from "../site-config";
   </div>
 
   <div class="view-all">
-    <Button href="/projects" variant="outline"> View All Projects </Button>
+    <Button href="/projects" size="lg" variant="outline">
+      View All Projects
+    </Button>
   </div>
 </section>
 
 <style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg, 2rem);
+    grid-auto-rows: 1fr;
+  }
+
   .view-all {
-    margin-top: var(--s2);
+    margin-top: var(--s3);
     text-align: center;
   }
 </style>

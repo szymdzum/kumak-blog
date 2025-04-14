@@ -1,9 +1,18 @@
 ---
+/**
+ * Button component that can render either as a button element or an anchor tag
+ * @component
+ */
 interface Props {
+  /** URL for anchor tag rendering. If provided, component renders as <a>, otherwise as <button> */
   href?: string;
+  /** Visual style variant of the button */
   variant?: "primary" | "secondary" | "outline";
+  /** Size variant affecting padding and font size */
   size?: "sm" | "md" | "lg";
+  /** HTML button type attribute. Only applies when rendering as <button> */
   type?: "button" | "submit" | "reset";
+  /** Additional CSS classes to apply to the button */
   class?: string;
 }
 
@@ -14,9 +23,6 @@ const {
   type = "button",
   class: className = "",
 } = Astro.props;
-
-// Determine which element to render based on href presence
-const Element = href ? "a" : "button";
 ---
 
 {
@@ -33,7 +39,6 @@ const Element = href ? "a" : "button";
 
 <style>
   .button {
-    /* Base styles */
     display: inline-flex;
     align-items: center;
     justify-content: center;
