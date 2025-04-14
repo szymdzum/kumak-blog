@@ -4,10 +4,12 @@ import Head from "@components/Head.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import FormattedDate from "@components/ui/FormattedDate.astro";
+import HeroImage from "@components/ui/HeroImage.astro";
+import CodeBlockLayout from "@components/CodeBlockLayout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, pubDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -15,33 +17,57 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   <body>
     <Header />
     <main>
-      <article>
-        <div class="hero-image">
-          {
-            heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
-        </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1>{title}</h1>
-            <hr />
-          </div>
+      <article class="post-content">
+        <h1>{title}</h1>
+        <FormattedDate date={pubDate} />
+        <HeroImage src={heroImage} alt={title} />
+        <CodeBlockLayout>
           <slot />
-        </div>
+        </CodeBlockLayout>
       </article>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  .post-content {
+    --min-width: 320px;
+    --max-width: 760px;
+    --min-font: 1rem; /* 16px */
+    --max-font: 1.25rem; /* 20px */
+    --rhythm: 1.5rem;
+
+    width: min(var(--max-width), 90vw);
+    margin: 0 auto;
+
+    /* Fluid typography formula */
+    font-size: clamp(
+      var(--min-font),
+      var(--min-font) + (var(--max-font) - var(--min-font)) *
+        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width))),
+      var(--max-font)
+    );
+
+    /* Maintain optimal line length */
+    max-width: 38em;
+    line-height: 1.6;
+
+    p,
+    ul,
+    ol,
+    blockquote,
+    pre {
+      margin-bottom: var(--rhythm);
+    }
+
+    h2 {
+      margin-top: calc(var(--rhythm) * 2);
+      margin-bottom: var(--rhythm);
+    }
+    /* Option 1: Spacing between paragraphs */
+    p + p {
+      margin-top: var(--rhythm);
+    }
+  }
+</style>
