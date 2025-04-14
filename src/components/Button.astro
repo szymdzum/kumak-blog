@@ -1,31 +1,71 @@
 ---
 interface Props {
-  href: string;
-  variant?: "primary" | "secondary";
+  href?: string;
+  variant?: "primary" | "secondary" | "outline";
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit" | "reset";
   class?: string;
 }
 
-const { href, variant = "primary", class: className = "" } = Astro.props;
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  type = "button",
+  class: className = "",
+} = Astro.props;
+
+// Determine which element to render based on href presence
+const Element = href ? "a" : "button";
 ---
 
-<a href={href} class={`button ${variant} ${className}`}>
-  <slot />
-</a>
+{
+  href ? (
+    <a href={href} class:list={["button", variant, size, className]}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={["button", variant, size, className]}>
+      <slot />
+    </button>
+  )
+}
 
 <style>
   .button {
+    /* Base styles */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: var(--button-height-lg);
-    padding-inline: var(--s2);
     font-weight: var(--font-weight-medium);
     border-radius: var(--radius);
     text-decoration: none;
     white-space: nowrap;
     transition: all 0.2s ease;
+    border: 1px solid transparent;
+    gap: var(--s1);
   }
 
+  /* Size variants */
+  .sm {
+    height: var(--button-height-sm, 2rem);
+    padding-inline: var(--s1);
+    font-size: var(--text-sm);
+  }
+
+  .md {
+    height: var(--button-height-md, 2.5rem);
+    padding-inline: var(--s2);
+    font-size: var(--text-base);
+  }
+
+  .lg {
+    height: var(--button-height-lg, 3rem);
+    padding-inline: var(--s3);
+    font-size: var(--text-lg);
+  }
+
+  /* Style variants */
   .primary {
     background-color: var(--color-primary);
     color: white;
@@ -36,12 +76,21 @@ const { href, variant = "primary", class: className = "" } = Astro.props;
   }
 
   .secondary {
-    background-color: transparent;
-    color: inherit;
-    border: 1px solid var(--color-border);
+    background-color: var(--color-secondary, #f3f4f6);
+    color: var(--color-text);
   }
 
   .secondary:hover {
+    background-color: var(--color-secondary-dark, #e5e7eb);
+  }
+
+  .outline {
+    background-color: transparent;
+    border-color: var(--color-border);
+    color: inherit;
+  }
+
+  .outline:hover {
     background-color: rgba(var(--foreground-rgb), 0.05);
     border-color: var(--color-border-hover);
   }

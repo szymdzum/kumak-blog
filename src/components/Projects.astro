@@ -1,17 +1,11 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
-import { siteConfig, featuredProjects } from "../site-config";
+import Button from "./Button.astro";
+import { featuredProjects } from "../site-config";
 ---
 
-<section class="featured-projects">
-  <div class="hero">
-    <div class="hero-content">
-      <h1>{siteConfig.name}</h1>
-      <p class="tagline">{siteConfig.tagline}</p>
-    </div>
-  </div>
-
-  <div class="projects-grid">
+<section>
+  <div class="flexbox-row">
     {
       featuredProjects
         .filter((project) => project.featured)
@@ -28,156 +22,32 @@ import { siteConfig, featuredProjects } from "../site-config";
   </div>
 
   <div class="view-all">
-    <a href="/projects" class="button outline"> View All Projects </a>
+    <Button href="/projects" variant="outline"> View All Projects </Button>
   </div>
 </section>
 
 <style>
-  .header {
-    max-width: 980px;
-    margin-inline: auto;
+  /*
+ * Responsive Flexbox Grid
+ * Flexbox  has different behavior for the last row (items expand to fill available space)
+ */
+  .flexbox-row {
+    --min: 20ch;
+    /* Minimum item width before wrapping */
+    --gap: 1rem;
+    /* Gap between flex items */
+
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--s1);
-  }
+    flex-wrap: wrap;
+    gap: var(--gap);
 
-  @media (min-width: 640px) {
-    .header {
-      align-items: center;
-    }
-  }
-
-  .header h2 {
-    font-size: var(--s2);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  @media (min-width: 768px) {
-    .header h2 {
-      font-size: var(--s3);
-    }
-  }
-
-  .header p {
-    color: var(--color-muted);
-  }
-
-  @media (min-width: 768px) {
-    .header p {
-      font-size: var(--s1);
-    }
-  }
-
-  .hero {
-    width: 100%;
-    padding: var(--s4) var(--s1);
-    margin-bottom: var(--s3);
-    background: linear-gradient(
-      to bottom right,
-      rgba(var(--foreground-rgb), 0.05),
-      transparent
-    );
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .hero-content {
-    max-width: 980px;
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--s1);
-  }
-
-  .hero h1 {
-    font-size: var(--s3);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-  }
-
-  .hero .tagline {
-    font-size: var(--s1);
-    color: var(--color-muted);
-    max-width: 40ch;
-  }
-
-  @media (min-width: 640px) {
-    .hero-content {
-      align-items: center;
-      text-align: center;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .hero {
-      padding: var(--s5) var(--s1);
-    }
-
-    .hero h1 {
-      font-size: var(--s4);
-    }
-
-    .hero .tagline {
-      font-size: var(--s2);
-    }
-  }
-
-  .projects-grid {
-    max-width: 64rem; /* 5xl */
-    margin-inline: auto;
-    margin-top: var(--s2);
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 640px) {
-    .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .projects-grid {
-      grid-template-columns: repeat(3, 1fr);
+    > * {
+      flex: 1 1 var(--min);
     }
   }
 
   .view-all {
     margin-top: var(--s2);
     text-align: center;
-  }
-
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--button-height);
-    padding-inline: var(--s1);
-    font-weight: 500;
-    border-radius: var(--radius);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-  }
-
-  .button.outline {
-    background-color: transparent;
-    color: inherit;
-    border: 1px solid var(--color-border);
-  }
-
-  .button.outline:hover {
-    background-color: rgba(var(--foreground-rgb), 0.05);
-    border-color: var(--color-border-hover);
-  }
-
-  .icon {
-    width: 1rem;
-    height: 1rem;
-    margin-left: 0.5rem;
   }
 </style>

@@ -1,6 +1,4 @@
-/* Base layout styles */
 body {
-  /* Layout-specific properties only */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -9,9 +7,15 @@ body {
 }
 
 main {
-  margin: 0 auto;
   width: 100%;
-  padding: var(--padding-md);
+  flex: 1;
+}
+
+section:not(.hero) {
+  margin-inline: auto;
+  max-width: var(--content-width, 1200px);
+  padding-inline: var(--padding-x, 2rem);
+  padding-block: var(--padding-y, 3rem);
 }
 
 footer {
@@ -20,29 +24,8 @@ footer {
 }
 
 .center {
-  box-sizing: content-box;
   margin-inline: auto;
+  box-sizing: content-box;
   max-width: var(--max-width, var(--measure));
   padding-inline: var(--padding, var(--s1));
-}
-
-/* ===== Imposter Layout ===== */
-.imposter {
-  --margin: 0px;
-
-  position: var(--positioning, absolute);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.imposter.contain {
-  overflow: auto;
-  max-width: calc(100% - var(--margin) * 2);
-  max-height: calc(100% - var(--margin) * 2);
-}
-
-.imposter.fixed {
-  --positioning: fixed;
 }
