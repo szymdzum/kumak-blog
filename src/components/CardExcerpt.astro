@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  maxLength?: number;
+}
+
+const { post, maxLength = 160 } = Astro.props;
+
+// Create excerpt from description or content
+function createExcerpt(
+  post: CollectionEntry<"blog">,
+  maxLength: number,
+): string {
+  // Use the description if available
+  let excerpt = post.data.description;
+
+  // If no description and body is available, use first part of content
+  if (!excerpt && post.body) {
+    excerpt = post.body
+      .replace(/\n/g, " ") // Replace newlines with spaces
+      .replace(/[#*~`_]+/g, "") // Remove markdown formatting
+      .replace(/\s{2,}/g, " ") // Normalize spaces
+      .trim();
+  }
+
+  // Use fallback if still no excerpt
+  if (!excerpt) {
+    return "Read more about this post...";
+  }
+
+  // Truncate to maxLength
+  if (excerpt.length > maxLength) {
+    excerpt = excerpt.substring(0, maxLength).trim() + "...";
+  }
+
+  return excerpt;
+}
+
+const excerpt = createExcerpt(post, maxLength);
+---
+
+<div class="card-excerpt">
+  <p>{excerpt}</p>
+</div>
+
+<style>
+  .card-excerpt {
+    padding: 0 var(--s1, 1rem);
+    flex-grow: 1;
+  }
+
+  .card-excerpt p {
+    color: var(--color-muted, #64748b);
+    margin: 0;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+</style>

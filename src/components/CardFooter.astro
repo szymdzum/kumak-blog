@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<footer class="card-footer">
+  <div class="read-more">
+    <a href={`/blog/${post.id}`} class="read-more-link"> Read more </a>
+  </div>
+</footer>
+
+<style>
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--s1, 1rem);
+    padding-top: var(--s-1, 0.5rem);
+    margin-top: auto;
+  }
+
+  .read-more-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-primary, #3490dc);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius, 0.25rem);
+    background-color: var(--color-primary-bg, rgba(52, 144, 220, 0.1));
+    transition: background-color 0.2s ease;
+  }
+
+  .read-more-link:hover {
+    background-color: var(--color-primary-bg-hover, rgba(52, 144, 220, 0.2));
+  }
+</style>
