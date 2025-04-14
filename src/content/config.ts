@@ -1,5 +1,5 @@
 import { glob } from 'astro/loaders';
-import { type CollectionEntry, defineCollection, getCollection, z } from 'astro:content';
+import { defineCollection, z } from 'astro:content';
 
 const blog = defineCollection({
   // Load Markdown and MDX files in the `src/content/blog/` directory.
