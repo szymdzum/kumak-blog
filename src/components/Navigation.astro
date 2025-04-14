@@ -1,5 +1,8 @@
 ---
 import { siteConfig } from "@/site-config";
+import { isPathActive } from "@/utils/path";
+
+const currentPath = Astro.url.pathname;
 ---
 
 <nav aria-label="Main navigation">
@@ -10,7 +13,7 @@ import { siteConfig } from "@/site-config";
           <a
             href={href}
             role="menuitem"
-            aria-current={Astro.url.pathname === href ? "page" : undefined}
+            aria-current={isPathActive(currentPath, href) ? "page" : undefined}
           >
             {title}
           </a>
