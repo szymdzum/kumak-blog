@@ -5,7 +5,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import FormattedDate from "@components/ui/FormattedDate.astro";
 import HeroImage from "@components/ui/HeroImage.astro";
-import CodeBlockLayout from "@components/CodeBlockLayout.astro";
+import "../styles/pretty-code.css";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -21,9 +21,7 @@ const { title, pubDate, heroImage } = Astro.props;
         <h1>{title}</h1>
         <FormattedDate date={pubDate} />
         <HeroImage src={heroImage} alt={title} />
-        <CodeBlockLayout>
-          <slot />
-        </CodeBlockLayout>
+        <slot />
       </article>
     </main>
     <Footer />
