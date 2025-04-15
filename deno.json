@@ -3,13 +3,13 @@
     "@deno/astro-adapter": "npm:@deno/astro-adapter"
   },
   "tasks": {
-    "dev": "deno run -A npm:astro@5.6.1 dev",
-    "build": "deno run -A npm:astro@5.6.1 build",
-    "preview": "deno run -A npm:astro@5.6.1 preview",
+    "dev": "deno run -A npm:astro@5.7.0 dev",
+    "build": "deno run -A npm:astro@5.7.0 build",
+    "preview": "deno run -A npm:astro@5.7.0 preview",
     "lint": "deno lint",
     "format": "deno fmt",
     "check": "deno lint && deno fmt",
-    "check-all": "deno check \"**/*.{ts,js,tsx,jsx}\" && deno lint && deno fmt"
+    "check-all": "deno run -A npm:astro@5.7.0 check && deno lint && deno fmt"
   },
   "fmt": {
     "useTabs": false,

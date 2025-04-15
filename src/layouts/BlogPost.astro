@@ -20,7 +20,7 @@ const { title, pubDate, heroImage } = Astro.props;
       <article class="post-content">
         <h1>{title}</h1>
         <FormattedDate date={pubDate} />
-        <HeroImage src={heroImage} alt={title} />
+        {heroImage && <HeroImage src={heroImage} alt={title} />}
         <slot />
       </article>
     </main>

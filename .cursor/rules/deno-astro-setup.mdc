@@ -1,0 +1,92 @@
+---
+description: Project-specific guidelines for Astro with Deno runtime
+globs: ["**/*.{ts,js,tsx,jsx,astro}"]
+alwaysApply: true
+---
+# Astro + Deno Project Setup
+
+## Core Configuration
+
+This project is an Astro (v5.6.1) blog/website running on Deno (v2.2.9) with server-side rendering. The integration has specific requirements that must be followed.
+
+### Runtime Environment
+
+- Uses Deno instead of Node.js as the runtime
+- Configured with @astrojs/deno adapter
+- Server-side rendering (SSR) output mode
+- Site URL: https://kumak.dev
+
+## Project Structure
+
+```
+src/
+├── components/     # Astro UI components (.astro files)
+├── content/blog/   # MDX blog content
+├── layouts/        # Page templates
+├── pages/          # Page routes and endpoints
+├── styles/         # CSS stylesheets (plain CSS)
+├── utils/          # TypeScript utility functions
+├── env.d.ts        # TypeScript environment definitions
+└── site-config.ts  # Site-wide configuration
+```
+
+## Development Workflow
+
+### Commands
+
+| Task | Command | Description |
+|------|---------|-------------|
+| Development | `deno task dev` | Start dev server |
+| Build | `deno task build` | Build for production |
+| Preview | `deno task preview` | Preview production build |
+| Type checking | `deno task check-all` | Run astro check + lint + fmt |
+| Lint | `deno task lint` | Lint codebase |
+| Format | `deno task format` | Format code |
+
+## Technical Requirements
+
+### DO
+
+- ✅ Run all commands through Deno tasks (`deno task [name]`)
+- ✅ Use `astro check` for type checking Astro files
+- ✅ Add dependencies with `deno add npm:package-name`
+- ✅ Follow the existing project structure
+- ✅ Follow Astro conventions for components and pages
+- ✅ Use Content Collections for blog content
+- ✅ Use plain CSS files for styling
+
+### DON'T
+
+- ❌ Use `deno check` directly on Astro files
+- ❌ Add npm dependencies without the `npm:` prefix
+- ❌ Use Node.js-specific features or APIs
+- ❌ Add dependencies that don't work with Deno
+- ❌ Modify the Astro+Deno integration configuration without testing
+
+## Technical Constraints
+
+1. **Type Checking**
+   - Must use `astro check` instead of `deno check`
+   - Astro-specific imports like "astro:content" cannot be checked by Deno directly
+
+2. **Image Processing**
+   - The @astrojs/deno adapter has limited support for Sharp image processing
+   - Use alternatives when possible
+
+3. **Dependencies**
+   - All npm packages must be added with `deno add npm:package-name`
+   - Required dependencies for type checking:
+     - `npm:@astrojs/check`
+     - `npm:typescript`
+
+## Content Management
+
+- Uses Astro's content collections for blog posts
+- MDX content stored in `src/content/blog/`
+- Content types defined in `src/content/config.ts`
+
+## Styling
+
+- Uses plain CSS files in `src/styles/`
+- No CSS preprocessors or frameworks
+

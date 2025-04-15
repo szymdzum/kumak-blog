@@ -1,22 +1,23 @@
-/* Theme Variables */
+/* Theme Variables - DARK THEME DEFAULT */
 :root {
-  /* Light theme variables */
-  --color-bg: #ffffff;
-  --color-text: #111111;
-  --color-primary: #3273dc;
-  --color-secondary: #363636;
-  --color-accent: #ff470f;
-  --color-muted: #666666;
-  --color-border: #dbdbdb;
-  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* Dark theme variables (default) */
+  --color-bg: #181411;
+  --color-text: #f5f3f0;
+  --color-primary: #e0c9b9;
+  --color-secondary: #a39c94;
+  --color-accent: #b89c7a;
+  --color-muted: #7a736b;
+  --color-border: #28221e;
+  --color-muted-foreground: #b3ada7;
+  --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
 
-  /* RGB values for rgba() usage */
-  --background-rgb: 255, 255, 255;
-  --foreground-rgb: 17, 17, 17;
-  --border-rgb: 219, 219, 219;
-  --primary-rgb: 50, 115, 220;
-  --secondary-rgb: 54, 54, 54;
-  --accent-rgb: 255, 71, 15;
+  /* RGB values for dark theme */
+  --background-rgb: 18, 18, 18;
+  --foreground-rgb: 255, 255, 255;
+  --border-rgb: 64, 64, 64;
+  --primary-rgb: 102, 179, 255;
+  --secondary-rgb: 181, 181, 181;
+  --accent-rgb: 255, 115, 64;
 
   /* Border styles */
   --border-thin: 1px;
@@ -28,23 +29,68 @@
   --container-width: min(90%, 80ch);
   --header-height: min(4rem, 10vh);
 
-  /* Modular scale for spacing using a ratio of 1.5 */
-  --ratio: 1.5;
-  --s0: 1rem;
-  --s1: calc(var(--s0) * var(--ratio));
-  /* 1.5rem */
-  --s2: calc(var(--s1) * var(--ratio));
-  /* 2.25rem */
-  --s3: calc(var(--s2) * var(--ratio));
-  /* 3.375rem */
-  --s4: calc(var(--s3) * var(--ratio));
-  /* 5.063rem */
-  --s5: calc(var(--s4) * var(--ratio));
-  /* 7.594rem */
-  --s-1: calc(var(--s0) / var(--ratio));
-  /* 0.667rem */
-  --s-2: calc(var(--s-1) / var(--ratio));
-  /* 0.444rem */
+  /* Modular scale base and ratio */
+  --scale-base: 1rem;
+  --scale-ratio: 1.25;
+
+  /* Modular scale steps (font sizes, spacing) */
+  --s-2: calc(var(--scale-base) / (var(--scale-ratio) * var(--scale-ratio)));
+  --s-1: calc(var(--scale-base) / var(--scale-ratio));
+  --s0: var(--scale-base);
+  --s1: calc(var(--scale-base) * var(--scale-ratio));
+  --s2: calc(var(--s1) * var(--scale-ratio));
+  --s3: calc(var(--s2) * var(--scale-ratio));
+  --s4: calc(var(--s3) * var(--scale-ratio));
+
+  /* Fluid font sizes using clamp for intrinsic scaling */
+  --font-size-xs: clamp(0.8rem, 0.9vw + 0.7rem, 0.95rem);
+  --font-size-sm: clamp(0.95rem, 1vw + 0.8rem, 1.1rem);
+  --font-size-base: clamp(1rem, 1.2vw + 0.9rem, 1.25rem);
+  --font-size-lg: clamp(1.25rem, 1.5vw + 1rem, 1.563rem);
+  --font-size-xl: clamp(1.563rem, 2vw + 1.2rem, 1.953rem);
+  --font-size-2xl: clamp(1.953rem, 2.5vw + 1.5rem, 2.441rem);
+  --font-size-3xl: clamp(2.441rem, 3vw + 1.8rem, 3.052rem);
+
+  /* Font stacks */
+  --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family-heading: var(--font-family-base);
+  --font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line heights */
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-loose: 1.8;
+
+  /* Color palette (example, adjust as needed) */
+  --color-primary: #4f46e5;
+  --color-secondary: #1f2937;
+  --color-foreground: #222;
+  --color-background: #fff;
+  --color-muted: #6b7280;
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+
+  /* Border radius */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-lg: 1rem;
+
+  /* Shadows (optional) */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  /* Transition */
+  --theme-transition: color 0.2s, background 0.2s, border-color 0.2s;
+
+  /* Readable text measure */
+  --measure: 60ch;
 
   /* Responsive padding using clamp */
   --padding-xs: clamp(0.5rem, 1.5%, 0.75rem);
@@ -53,11 +99,7 @@
   --padding-lg: clamp(3rem, 12%, 6rem);
   --padding-xl: clamp(4rem, 16%, 8rem);
 
-  /* Standard measure for readable text */
-  --measure: 60ch;
-
   /* Theme transition */
-  --theme-transition: 0.2s ease-in-out;
   transition: background-color var(--theme-transition), color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
 
   /* Z-index layers */
@@ -71,44 +113,25 @@
   --z-tooltip: 60;
 }
 
-/* Dark theme variables */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #121212;
-    --color-text: #ffffff;
-    --color-primary: #66b3ff;
-    --color-secondary: #b5b5b5;
-    --color-accent: #ff7340;
-    --color-muted: #888888;
-    --color-border: #404040;
-    --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+/*
+  Light Theme Variables (for future use)
+  Uncomment and use as needed to enable light theme support.
 
-    /* RGB values for dark theme */
-    --background-rgb: 18, 18, 18;
-    --foreground-rgb: 255, 255, 255;
-    --border-rgb: 64, 64, 64;
-    --primary-rgb: 102, 179, 255;
-    --secondary-rgb: 181, 181, 181;
-    --accent-rgb: 255, 115, 64;
-  }
+:root[data-theme='light'] {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-primary: #3273dc;
+  --color-secondary: #363636;
+  --color-accent: #ff470f;
+  --color-muted: #666666;
+  --color-border: #dbdbdb;
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 17, 17, 17;
+  --border-rgb: 219, 219, 219;
+  --primary-rgb: 50, 115, 220;
+  --secondary-rgb: 54, 54, 54;
+  --accent-rgb: 255, 71, 15;
 }
-
-/* Manual dark theme class */
-:root[data-theme='dark'] {
-  --color-bg: #121212;
-  --color-text: #ffffff;
-  --color-primary: #66b3ff;
-  --color-secondary: #b5b5b5;
-  --color-accent: #ff7340;
-  --color-muted: #888888;
-  --color-border: #404040;
-  --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
-
-  /* RGB values for manual dark theme */
-  --background-rgb: 18, 18, 18;
-  --foreground-rgb: 255, 255, 255;
-  --border-rgb: 64, 64, 64;
-  --primary-rgb: 102, 179, 255;
-  --secondary-rgb: 181, 181, 181;
-  --accent-rgb: 255, 115, 64;
-}
+*/

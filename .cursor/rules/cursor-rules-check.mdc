@@ -1,0 +1,29 @@
+---
+description: Rule for AI agents to always check the .cursor/rules directory
+globs: 
+alwaysApply: true
+---
+# Check Project-Specific Rules
+
+## Core Principle
+
+Always check the `.cursor/rules` directory for project-specific guidelines before making suggestions or modifications to the codebase.
+
+## Rule Guidelines
+
+### DO
+
+- ✅ Read all `.mdc` files in the `.cursor/rules` directory at the start of any task
+- ✅ Apply project-specific conventions found in these rules
+- ✅ Prioritize rules specific to file types you're working with
+- ✅ Reference rule files when explaining decisions
+- ✅ Consider rule files as the authoritative source for project standards
+
+### DON'T
+
+- ❌ Skip reading the project rules
+- ❌ Contradict established guidelines in the rules
+- ❌ Apply generic patterns that conflict with project-specific ones
+- ❌ Treat all projects as having the same structure or conventions
+- ❌ Ignore technical constraints documented in the rules
+

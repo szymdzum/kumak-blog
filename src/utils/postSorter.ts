@@ -1,17 +1,31 @@
 import type { CollectionEntry } from 'astro:content';
 
+// Define the structure for blog post frontmatter
+interface BlogSchema {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  featured?: boolean;
+  tags?: string[];
+}
+
+// Define type alias for blog posts
+type BlogPost = CollectionEntry<'blog'> & {
+  data: BlogSchema;
+};
+
 /**
  * Valid options for sorting blog posts
- * @typedef {string} SortOption
  */
 export type SortOption = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc' | 'updated';
 
 /**
  * Valid options for filtering blog posts
  * Can be a string constant or a filter function
- * @typedef {string | Function} PostFilterOption
  */
-export type PostFilterOption = 'all' | 'featured' | ((post: CollectionEntry<'blog'>) => boolean);
+export type PostFilterOption = 'all' | 'featured' | ((post: BlogPost) => boolean);
 
 /**
  * Options for querying posts
@@ -54,9 +68,9 @@ export const PostQueries = {
     /** Only posts marked as featured */
     FEATURED: 'featured' as PostFilterOption,
     /** Only posts with hero images */
-    HAS_IMAGE: ((post: CollectionEntry<'blog'>) => !!post.data.heroImage) as PostFilterOption,
+    HAS_IMAGE: ((post: BlogPost) => !!post.data.heroImage) as PostFilterOption,
     /** Only posts published in the current year */
-    PUBLISHED_THIS_YEAR: ((post: CollectionEntry<'blog'>) => {
+    PUBLISHED_THIS_YEAR: ((post: BlogPost) => {
       const now = new Date();
       return post.data.pubDate.getFullYear() === now.getFullYear();
     }) as PostFilterOption,
@@ -86,13 +100,13 @@ export const PostQueries = {
  */
 export class PostsManager {
   /** The internal array of posts */
-  private posts: CollectionEntry<'blog'>[];
+  private posts: BlogPost[];
 
   /**
    * Creates a new PostsManager instance
    * @param posts The collection of blog posts to manage
    */
-  constructor(posts: CollectionEntry<'blog'>[]) {
+  constructor(posts: BlogPost[]) {
     this.posts = posts;
   }
 
@@ -113,9 +127,7 @@ export class PostsManager {
     if (filterOption === 'all') {
       return this;
     }
-
-    let filteredPosts: CollectionEntry<'blog'>[];
-
+    let filteredPosts: BlogPost[];
     if (filterOption === 'featured') {
       filteredPosts = this.posts.filter((post) => post.data.featured === true);
     } else if (typeof filterOption === 'function') {
@@ -224,7 +236,7 @@ export class PostsManager {
    * @example
    * const posts = manager.filter('featured').sort('title-asc').get();
    */
-  get(): CollectionEntry<'blog'>[] {
+  get(): BlogPost[] {
     return this.posts;
   }
 
@@ -241,9 +253,9 @@ export class PostsManager {
    *   tags: ['javascript']
    * });
    */
-  query(options: PostQueryOptions = {}): CollectionEntry<'blog'>[] {
+  query(options: PostQueryOptions = {}): BlogPost[] {
     // Helper function to conditionally apply a transformation
-    const applyIf = <T>(
+    const applyIf = (
       condition: boolean,
       transform: (instance: this) => this,
       instance: this,
@@ -283,9 +295,9 @@ export class PostsManager {
    * });
    */
   static query(
-    posts: CollectionEntry<'blog'>[],
+    posts: BlogPost[],
     options: PostQueryOptions = {},
-  ): CollectionEntry<'blog'>[] {
+  ): BlogPost[] {
     return new PostsManager(posts).query(options);
   }
 
@@ -295,7 +307,7 @@ export class PostsManager {
    * @param count Maximum number of posts to return (default: 3)
    * @returns Array of the most recent blog posts
    */
-  static getLatest(posts: CollectionEntry<'blog'>[], count: number = 3): CollectionEntry<'blog'>[] {
+  static getLatest(posts: BlogPost[], count: number = 3): BlogPost[] {
     return PostsManager.query(posts, {
       sortBy: PostQueries.SORT.NEWEST_FIRST,
       limit: count,
@@ -308,7 +320,7 @@ export class PostsManager {
    * @param count Optional maximum number of posts to return
    * @returns Array of featured blog posts
    */
-  static getFeatured(posts: CollectionEntry<'blog'>[], count?: number): CollectionEntry<'blog'>[] {
+  static getFeatured(posts: BlogPost[], count?: number): BlogPost[] {
     return PostsManager.query(posts, {
       filter: PostQueries.FILTER.FEATURED,
       sortBy: PostQueries.SORT.NEWEST_FIRST,
@@ -323,7 +335,7 @@ export class PostsManager {
    * @param count Optional maximum number of posts to return
    * @returns Array of posts with the specified tag
    */
-  static getByTag(posts: CollectionEntry<'blog'>[], tag: string, count?: number): CollectionEntry<'blog'>[] {
+  static getByTag(posts: BlogPost[], tag: string, count?: number): BlogPost[] {
     return PostsManager.query(posts, {
       tags: [tag],
       sortBy: PostQueries.SORT.NEWEST_FIRST,
@@ -337,7 +349,7 @@ export class PostsManager {
    * @param count Maximum number of posts to return (default: 5)
    * @returns Array of most recently updated blog posts
    */
-  static getRecentlyUpdated(posts: CollectionEntry<'blog'>[], count: number = 5): CollectionEntry<'blog'>[] {
+  static getRecentlyUpdated(posts: BlogPost[], count: number = 5): BlogPost[] {
     return PostsManager.query(posts, {
       sortBy: PostQueries.SORT.RECENTLY_UPDATED,
       limit: count,
