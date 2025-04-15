@@ -1,0 +1,99 @@
+<div class="perspective-grid">
+  <svg
+    id="grid"
+    viewBox="0 0 1000 800"
+    xmlns="http://www.w3.org/2000/svg"
+    width="100%"
+    height="100%"
+    preserveAspectRatio="xMidYMid slice"
+  >
+    <!-- Background -->
+    <rect width="1000" height="800" fill="#000000"></rect>
+
+    <!-- Perspective Grid -->
+    <g stroke="#FFFFFF" stroke-width="1.8">
+      <!-- Horizontal Lines -->
+      <line x1="0" y1="200" x2="1000" y2="200"></line>
+      <line x1="0" y1="400" x2="1000" y2="400"></line>
+      <line x1="0" y1="600" x2="1000" y2="600"></line>
+
+      <!-- Vertical Lines -->
+      <line x1="200" y1="0" x2="200" y2="800"></line>
+      <line x1="400" y1="0" x2="400" y2="800"></line>
+      <line x1="600" y1="0" x2="600" y2="800"></line>
+      <line x1="800" y1="0" x2="800" y2="800"></line>
+
+      <!-- Perspective Lines from Center -->
+      <line x1="500" y1="400" x2="0" y2="0"></line>
+      <line x1="500" y1="400" x2="1000" y2="0"></line>
+      <line x1="500" y1="400" x2="0" y2="800"></line>
+      <line x1="500" y1="400" x2="1000" y2="800"></line>
+      <line x1="500" y1="400" x2="0" y2="400"></line>
+      <line x1="500" y1="400" x2="1000" y2="400"></line>
+      <line x1="500" y1="400" x2="500" y2="0"></line>
+      <line x1="500" y1="400" x2="500" y2="800"></line>
+
+      <!-- Inner Rectangles -->
+      <rect id="rect1" x="250" y="200" width="500" height="400" fill="none"
+      ></rect>
+      <rect id="rect2" x="350" y="300" width="300" height="200" fill="none"
+      ></rect>
+    </g>
+  </svg>
+</div>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Animation variables
+    const svg = document.getElementById("grid");
+    if (!svg) return;
+
+    // Starting values
+    let scale = 1;
+    const minScale = 1;
+    const maxScale = 1.3;
+    let growing = true;
+    const stepSize = 0.0002; // Smaller for slower animation
+
+    // Animation function
+    function animate() {
+      // Determine direction
+      if (scale >= maxScale) growing = false;
+      if (scale <= minScale) growing = true;
+
+      // Update scale
+      scale = growing ? scale + stepSize : scale - stepSize;
+
+      // Apply transform to SVG
+      svg.style.transform = `scale(${scale})`;
+      svg.style.transformOrigin = "center center";
+
+      // Continue animation
+      requestAnimationFrame(animate);
+    }
+
+    // Start animation
+    animate();
+  });
+</script>
+
+<style>
+  .perspective-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.4;
+    filter: blur(1px) saturate(0.7) brightness(0.8);
+  }
+
+  #grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

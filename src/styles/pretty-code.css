@@ -9,7 +9,7 @@
   --code-line-highlight: rgba(65, 72, 104, 0.5);
   --code-word-highlight: rgba(82, 107, 175, 0.5);
   --code-radius: 0.5rem;
-  --code-font: "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  --code-font: 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
 }
 
 /* Code blocks */
@@ -24,7 +24,7 @@ pre {
   line-height: 1.5;
 }
 
-pre>code {
+pre > code {
   display: grid;
   padding: 1.25rem;
   overflow-x: auto;
@@ -57,7 +57,7 @@ div[data-rehype-pretty-code-title] {
   align-items: center;
 }
 
-div[data-rehype-pretty-code-title]+pre {
+div[data-rehype-pretty-code-title] + pre {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   margin-top: 0;
@@ -90,13 +90,13 @@ button[data-copy]:hover {
   background-color: rgba(38, 50, 78, 0.8);
 }
 
-button[data-copy][data-copied="true"] {
+button[data-copy][data-copied='true'] {
   background-color: #65bcff30;
   border-color: #65bcff;
 }
 
 /* Inline code */
-:not(pre)>code {
+:not(pre) > code {
   font-family: var(--code-font);
   color: #ff966c;
   background-color: rgba(26, 34, 52, 0.5);

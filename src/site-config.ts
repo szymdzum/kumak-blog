@@ -43,7 +43,7 @@ export const featuredProjects = [
     title: 'Result Monad',
     description: 'TypeScript implementation of the Result monad pattern',
     tags: ['TypeScript', 'Monad', 'Error Handling'],
-    githubUrl: 'https://github.com/szymdzum/ts-result-monad',
+    githubUrl: 'https://github.com/szymdzum/result-monad',
     demoUrl: 'https://demo-url.com',
     featured: true,
   },
