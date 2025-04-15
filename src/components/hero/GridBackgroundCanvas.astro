@@ -1,0 +1,134 @@
+---
+// Canvas-based animated perspective grid background
+---
+
+<div class="perspective-grid-canvas">
+  <canvas id="perspective-canvas"></canvas>
+</div>
+
+<script is:inline>
+  const canvas = document.getElementById("perspective-canvas");
+  let ctx;
+  let width, height;
+  let animationFrameId;
+
+  // CSS variable for grid line color
+  function getGridLineColor() {
+    return (
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--grid-line-color",
+      ) || "#39ff14"
+    );
+  }
+
+  function resizeCanvas() {
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    canvas.width = width;
+    canvas.height = height;
+    ctx = canvas.getContext("2d");
+  }
+
+  // Grid parameters
+  const numDepthLines = 12;
+  const numRadialLines = 12;
+  const speed = 0.015; // Lower is slower
+  let offset = 0;
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, width, height);
+    // Background
+    ctx.fillStyle =
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--grid-bg-color",
+      ) || "#000";
+    ctx.fillRect(0, 0, width, height);
+
+    // Vanishing point
+    const cx = width / 2;
+    const cy = height / 2;
+    const maxDepth = Math.min(width, height) * 0.48;
+    const color = getGridLineColor();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.2;
+
+    // Draw radial lines
+    for (let i = 0; i < numRadialLines; i++) {
+      const angle = (i / numRadialLines) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(
+        cx + Math.cos(angle) * maxDepth,
+        cy + Math.sin(angle) * maxDepth,
+      );
+      ctx.stroke();
+    }
+
+    // Draw depth (horizontal) lines, moving forward
+    for (let i = 1; i < numDepthLines; i++) {
+      // Looping offset
+      let t = ((i + offset) % numDepthLines) / numDepthLines;
+      // Perspective scaling
+      let d = t * maxDepth;
+      ctx.beginPath();
+      for (let j = 0; j < numRadialLines; j++) {
+        const angle = (j / numRadialLines) * Math.PI * 2;
+        const x = cx + Math.cos(angle) * d;
+        const y = cy + Math.sin(angle) * d;
+        if (j === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+  }
+
+  function animate() {
+    offset += speed;
+    if (offset >= numDepthLines) offset -= numDepthLines;
+    drawGrid();
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  function start() {
+    resizeCanvas();
+    animate();
+  }
+  
+  function cleanup() {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  document.addEventListener("DOMContentLoaded", start);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cleanup();
+    } else {
+      animate();
+    }
+  });
+</script>
+
+<style>
+  .perspective-grid-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+  }
+  #perspective-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  :root {
+    --grid-line-color: #39ff14;
+    --grid-bg-color: #000;
+  }
+</style>

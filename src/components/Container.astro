@@ -1,22 +1,26 @@
 ---
 interface Props {
   layout?: "row" | "column";
-  as?: string;
+  as?: keyof HTMLElementTagNameMap;  // Change type to be more specific
   class?: string;
 }
 
 const {
   layout = "row",
-  as: Element = "div",
+  as = "div",
   class: className = "",
-} = Astro.props;
+}: Props = Astro.props;
+
+// Create the class string
+const classNames = `container ${layout === "row" ? "row" : "column"} ${className}`.trim();
 ---
 
-<Element
-  class={`container ${layout === "row" ? "row" : "column"} ${className}`}
->
-  <slot />
-</Element>
+{as === "div" && <div class={classNames}><slot /></div>}
+{as === "section" && <section class={classNames}><slot /></section>}
+{as === "article" && <article class={classNames}><slot /></article>}
+{as === "main" && <main class={classNames}><slot /></main>}
+{as === "aside" && <aside class={classNames}><slot /></aside>}
+{as === "nav" && <nav class={classNames}><slot /></nav>}
 
 <style>
   .container {

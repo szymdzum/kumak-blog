@@ -11,7 +11,7 @@ const { post } = Astro.props;
 ---
 
 <article class="post-card">
-  <PostContent post={post} showTitle={true} />
+  <PostContent post={post} />
   <div class="image-container">
     <Image
       src={post.data.heroImage || "/blog-placeholder-1.jpg"}

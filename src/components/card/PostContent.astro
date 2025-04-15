@@ -5,11 +5,10 @@ import Button from "@components/ui/Button.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
-  showTitle?: boolean;
   maxLength?: number;
 }
 
-const { post, showTitle = false } = Astro.props;
+const { post } = Astro.props;
 ---
 
 <div class="post-content stack">
