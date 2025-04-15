@@ -7,15 +7,12 @@ body {
 }
 
 main {
+  /* Harmonized with layout standard: centered, max-width 80ch, horizontal padding for breathing room */
   width: 100%;
   flex: 1;
-}
-
-section:not(.hero) {
   margin-inline: auto;
-  max-width: var(--content-width, 1200px);
-  padding-inline: var(--padding-x, 2rem);
-  padding-block: var(--padding-y, 3rem);
+  max-width: 80ch;
+  padding-inline: var(--padding-sm);
 }
 
 footer {

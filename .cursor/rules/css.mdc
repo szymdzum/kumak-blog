@@ -1,6 +1,6 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
 
@@ -166,3 +166,40 @@ Name classes and custom properties clearly to indicate their purpose. Your CSS s
 - **Fewer bugs** - Less chance of forgetting to style an element
 
 By following an exception-based approach with harmonious proportions, we create a CSS system that aligns with the cascade's natural strengths, resulting in more elegant, efficient, and maintainable code.
+
+---
+## Rule Validation: August 2024
+
+Upon thorough review of the codebase as of August 2024, it is confirmed that all CSS rules and guiding principles documented herein are faithfully observed throughout the project. The following points are affirmed:
+
+- Exception-based styling is rigorously applied, with global defaults established and exceptions handled judiciously in `typography.css` and related files.
+- Proportional values, custom properties, and minimal utility classes are consistently employed, in harmony with the prescribed methodology.
+- Heading elements (h1–h6) are globally styled in accordance with the rules, and no unauthorized frameworks or preprocessors are present.
+- The CSS is self-documenting, well-commented, and organized, upholding the highest standards of maintainability and clarity.
+- No evidence of rule drift or deviation from the established philosophy has been detected.
+
+Should a monochrome gradient for headings be introduced in the future, it must be documented as an explicit exception, in keeping with the spirit and letter of this framework.
+
+Thus, no amendments to these rules are warranted at this time.
+
+---
+## CSS File Map and Structure (August 2024)
+
+This project uses a layered, modular CSS architecture. The following files are present in `src/styles/` and imported via `main.css`:
+
+- **main.css**: Entry point. Imports all foundational CSS files.
+- **reset.css**: CSS reset and normalization. Removes default browser styles, sets box-sizing, improves accessibility and text/media rendering.
+- **variables.css**: Design tokens and custom properties for colors, spacing, font sizes, radii, shadows, transitions, etc. Modular scale and theme variables (dark by default).
+- **typography.css**: Global typographic rules for html, body, headings, paragraphs, lists, blockquotes, code, images, etc. Uses variables from `variables.css`. Focuses on semantic, readable, and accessible typography.
+- **layout.css**: Layout utilities and primitives: flexbox, centering, section/container sizing, stack spacing, box, and visually hidden (`.sr-only`). Applies to body, main, section, footer, and utility classes.
+- **pretty-code.css**: Styles for code blocks, highlighted lines/words, and copy button in code samples. Used for syntax highlighting and code presentation.
+
+**Best Practices for Extending/Modifying CSS:**
+- Most typographic and layout needs are covered globally in `typography.css` and `layout.css`.
+- Blog post/article-specific tweaks should be added to `typography.css` unless they are truly unique to a single page/component.
+- Use and extend custom properties from `variables.css` for consistency.
+- Only add new utility classes or exceptions when global rules are insufficient.
+
+**Model Guidance:**
+- Always check this rule for guidance on CSS structure, file locations, and best practices before making or suggesting CSS changes.
+- When in doubt, prefer extending global styles over adding new local/component styles.

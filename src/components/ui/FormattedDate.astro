@@ -1,28 +1,27 @@
 ---
 interface Props {
   date: Date | string;
+  // All other props are forwarded to <time> for semantic flexibility
 }
 
-const { date } = Astro.props;
+const { date, ...rest } = Astro.props;
 const dateObj = date instanceof Date ? date : new Date(date);
 ---
 
-<time datetime={dateObj.toISOString()}>
+{
+  /*
+  Hybrid approach: This component forwards all extra props (except 'date') to the <time> element.
+  This allows parent components to add semantic attributes (e.g., itemprop, class) as needed.
+  Date is formatted as '5 May 2025' using 'en-GB' locale for day-month-year order.
+  Styling is not included; style externally via class or selector for flexibility.
+*/
+}
+<time datetime={dateObj.toISOString()} class="formatted-date" {...rest}>
   {
-    dateObj.toLocaleDateString("en-us", {
-      year: "numeric",
-      month: "short",
+    dateObj.toLocaleDateString("en-GB", {
       day: "numeric",
+      month: "long",
+      year: "numeric",
     })
   }
 </time>
-
-<style>
-  time {
-    font-size: var(--text-base, 1rem);
-    font-weight: 500;
-    color: var(--color-muted, #64748b);
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-sm, 0.25rem);
-  }
-</style>

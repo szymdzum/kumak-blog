@@ -1,6 +1,45 @@
+# Agent-Driven Rule Validation and User Notification Workflow
+
+## Purpose
+This document establishes the formal workflow for agent-driven rule validation, discrepancy notification, and user-in-the-loop rule management. Its goal is to ensure that all `.cursor/rules` files remain up-to-date, authoritative, and faithfully reflect the current state and philosophy of the codebase across all domains (CSS, Astro, Deno, content, etc.).
+
+## Workflow Steps
+
+1. **Rule Validation Before Every Action**
+   - The agent must read and validate all relevant `.cursor/rules` files before any planning or execution step.
+   - The agent must act strictly according to the rules as written.
+
+2. **Discrepancy Detection and User Notification**
+   - If the agent finds any discrepancy between the rules and the codebase (e.g., a convention is not followed, a new undocumented pattern is present, or a rule is outdated), the agent must:
+     - Immediately notify the user, describing the discrepancy in clear, specific terms.
+     - Pause all further action until the user acknowledges or provides direction.
+
+3. **Rule Change Reporting**
+   - Any change or edit to the rules (or to the code that affects the rules) must be reported to the user.
+   - The agent must provide a summary of what was changed and why, before proceeding.
+
+4. **No Silent Rule Amendments**
+   - The agent is strictly forbidden from updating rules or documentation without explicit user notification.
+   - All rule amendments or documentation changes must be surfaced to the user for review and approval.
+
+5. **Strict Rule Adherence**
+   - The agent’s workflow is as follows:
+     1. Read and validate rules.
+     2. Report discrepancies or required updates.
+     3. Await user input/confirmation.
+     4. Proceed with planning/execution strictly according to the up-to-date rules.
+
+6. **User as Final Authority**
+   - The user is the final authority on all rule changes and must explicitly approve any amendment or update to the rules.
+
+7. **Transparency and Traceability**
+   - All actions, validations, and rule changes are logged and reported for full transparency.
+
+## Scope
+This workflow applies to all `.cursor/rules` files and governs agent behavior across all domains, including but not limited to CSS, Astro, Deno, and content management.
+
+## Future Amendments
+- Any changes to this workflow must be timestamped and summarized below.
+- Amendments require explicit user approval.
+
 ---
-description: 
-globs: 
-alwaysApply: true
----
- 

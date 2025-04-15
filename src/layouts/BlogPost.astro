@@ -17,55 +17,32 @@ const { title, pubDate, heroImage } = Astro.props;
   <body>
     <Header />
     <main>
-      <article class="post-content">
-        <h1>{title}</h1>
-        <FormattedDate date={pubDate} />
-        {heroImage && <HeroImage src={heroImage} alt={title} />}
-        <slot />
+      <article
+        class="post-content"
+        itemscope
+        itemtype="https://schema.org/Article"
+      >
+        <header>
+          <h1 itemprop="headline">{title}</h1>
+          {
+            /* Hybrid approach: FormattedDate handles <time> and receives semantic attributes from parent */
+          }
+          <p>
+            <FormattedDate date={pubDate} />
+          </p>
+          {heroImage && <HeroImage src={heroImage} alt={title} />}
+        </header>
+        <section itemprop="articleBody">
+          <slot />
+        </section>
+        <footer>
+          {
+            /* Comments Section Placeholder: Giscus plugin will be integrated here */
+          }
+          <section id="comments" aria-label="Comments"></section>
+        </footer>
       </article>
     </main>
     <Footer />
   </body>
 </html>
-
-<style>
-  .post-content {
-    --min-width: 320px;
-    --max-width: 760px;
-    --min-font: 1rem; /* 16px */
-    --max-font: 1.25rem; /* 20px */
-    --rhythm: 1.5rem;
-
-    width: min(var(--max-width), 90vw);
-    margin: 0 auto;
-
-    /* Fluid typography formula */
-    font-size: clamp(
-      var(--min-font),
-      var(--min-font) + (var(--max-font) - var(--min-font)) *
-        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width))),
-      var(--max-font)
-    );
-
-    /* Maintain optimal line length */
-    max-width: 38em;
-    line-height: 1.6;
-
-    p,
-    ul,
-    ol,
-    blockquote,
-    pre {
-      margin-bottom: var(--rhythm);
-    }
-
-    h2 {
-      margin-top: calc(var(--rhythm) * 2);
-      margin-bottom: var(--rhythm);
-    }
-    /* Option 1: Spacing between paragraphs */
-    p + p {
-      margin-top: var(--rhythm);
-    }
-  }
-</style>
