@@ -1,0 +1,142 @@
+---
+/**
+ * Based on inclusive-components.design/cards/
+ * Haydon's Card Component
+ */
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+const { post } = Astro.props;
+
+const { title, description, heroImage } = post.data;
+
+// Generate unique ID for aria-describedby
+const uniqueId = `desc-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<li class="card">
+  <div class="columns-3-2">
+    <!-- Content is structured with heading first (proper document structure) -->
+    <div class="card__text">
+      <h2 class="card__title">
+        <a href={`/blog/${post.id}`} aria-describedby={uniqueId}>{title}</a>
+      </h2>
+
+      {description && <p class="card__subtitle">{description}</p>}
+
+      <div class="card__body">
+        <slot />
+      </div>
+
+      <div class="card__footer">
+        <slot name="footer" />
+      </div>
+    </div>
+    <Image
+      src={heroImage || "/blog-placeholder-1.jpg"}
+      alt={title}
+      width={600}
+      height={450}
+      format="webp"
+      quality={80}
+      loading="lazy"
+    />
+  </div>
+</li>
+<!--
+<script>
+  const cards = document.querySelectorAll(".card");
+  Array.prototype.forEach.call(cards, (card) => {
+    console.log(card);
+    let down: number,
+      up: number,
+      link: HTMLAnchorElement | null = card.querySelector("h2 a");
+    card.onmousedown = () => (down = +new Date());
+    card.onmouseup = () => {
+      up = +new Date();
+      if (up - down < 200) {
+        if (link) link.click();
+      }
+    };
+  });
+</script> -->
+
+<style>
+  /* Base Card Component */
+  .card {
+    position: relative;
+    max-width: 100%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0 0 0.25rem var(--card-focus-color, rgba(8, 198, 131, 0.449));
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .card__inner {
+    height: 100%;
+    display: flex;
+  }
+
+  .card:hover {
+    box-shadow: 0 0 0 0.25rem var(--card-focus-color, rgba(198, 154, 8, 0.98));
+    transform: translateY(-4px);
+  }
+
+  .card a:focus {
+    text-decoration: underline;
+  }
+
+  .card:focus-within {
+    box-shadow: 0 0 0 0.25rem var(--card-focus-color, rgba(6, 32, 138, 0.956));
+  }
+
+  .card:focus-within h2 a:focus {
+    text-decoration: none;
+  }
+
+  .card:focus-within {
+    box-shadow: 0 0 0 0.25rem var(--card-focus-color, rgba(138, 6, 6, 0.956));
+  }
+
+  /* Title link styling and the pseudo-content trick for making the whole card clickable */
+  .card__title a {
+    text-decoration: none;
+    color: inherit;
+    /* Create a position context for pseudo element */
+    position: static;
+  }
+
+  .card__title a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .card__text > * + * {
+    margin-top: 0.75rem;
+  }
+
+  /* Media queries for responsiveness */
+  @media (min-width: 768px) {
+    .card__title {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* High contrast mode improvements */
+  @media (forced-colors: active) {
+    .card {
+      border: 1px solid;
+    }
+    .card:focus-within {
+      outline: 3px solid CanvasText;
+    }
+  }
+</style>

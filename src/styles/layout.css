@@ -1,43 +1,8 @@
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
-
-main {
-  /* Harmonized with layout standard: centered, max-width 80ch, horizontal padding for breathing room */
-  width: 100%;
-  flex: 1;
-  margin-inline: auto;
-  max-width: 80ch;
-  padding-inline: var(--padding-sm);
-}
-
-footer {
-  margin-top: auto;
-  padding: var(--padding-sm);
-}
-
 .center {
   margin-inline: auto;
   box-sizing: content-box;
   max-width: var(--max-width, var(--measure));
   padding-inline: var(--padding, var(--s1));
-}
-
-.flexbox-row {
-  --min: 20ch;
-  --gap: 1.5rem;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap);
-
-  > * {
-    flex: 1 1 var(--min);
-  }
 }
 
 .stack > * + * {
@@ -55,14 +20,32 @@ footer {
   border: 1px solid var(--color-border);
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+/* Grid layout helpers */
+.columns-3-2 {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--s3);
+  align-items: start;
+}
+
+/* Stack columns on small screens */
+@media (max-width: 768px) {
+  .columns-3-2 {
+    grid-template-columns: 1fr;
+    gap: var(--s2);
+  }
+}
+
+/* Flex layout helpers */
+.flexbox-row {
+  --min: 20ch;
+  --gap: 1.5rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+
+  > * {
+    flex: 1 1 var(--min);
+  }
 }

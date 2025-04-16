@@ -1,23 +1,23 @@
 /* Theme Variables - DARK THEME DEFAULT */
 :root {
-  /* Dark theme variables (default) */
-  --color-bg: #181411;
-  --color-text: #f5f3f0;
-  --color-primary: #e0c9b9;
-  --color-secondary: #a39c94;
-  --color-accent: #b89c7a;
-  --color-muted: #7a736b;
-  --color-border: #28221e;
-  --color-muted-foreground: #b3ada7;
-  --box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+  --primary-background: #0a0910;
+  --secondary-background: #161520;
+  --surface: #1e1c2a;
 
-  /* RGB values for dark theme */
-  --background-rgb: 18, 18, 18;
-  --foreground-rgb: 255, 255, 255;
-  --border-rgb: 64, 64, 64;
-  --primary-rgb: 102, 179, 255;
-  --secondary-rgb: 181, 181, 181;
-  --accent-rgb: 255, 115, 64;
+  /* Accent Colors */
+  --primary-accent: #ff4a2b;
+  --secondary-accent: #ff8a3d;
+  --tertiary-accent: #08b2b6;
+  --highlight: #ffffff;
+
+  /* Additional Values */
+  --shadow: #060608;
+  --text-primary: #f2f2f8;
+  --text-secondary: #a8a8bc;
+
+  /* Optional: For gradient effects */
+  --gradient-start: #ff4a2b;
+  --gradient-end: #08b2b6;
 
   /* Border styles */
   --border-thin: 1px;
@@ -62,30 +62,6 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Line heights */
-  --line-height-tight: 1.2;
-  --line-height-base: 1.5;
-  --line-height-loose: 1.8;
-
-  /* Color palette (example, adjust as needed) */
-  --color-primary: #4f46e5;
-  --color-secondary: #1f2937;
-  --color-foreground: #222;
-  --color-background: #fff;
-  --color-muted: #6b7280;
-  --color-error: #dc2626;
-  --color-success: #16a34a;
-
-  /* Border radius */
-  --radius: 0.5rem;
-  --radius-sm: 0.25rem;
-  --radius-lg: 1rem;
-
-  /* Shadows (optional) */
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-
   /* Transition */
   --theme-transition: color 0.2s, background 0.2s, border-color 0.2s;
 
@@ -98,9 +74,6 @@
   --padding-md: clamp(1.5rem, 6%, 3rem);
   --padding-lg: clamp(3rem, 12%, 6rem);
   --padding-xl: clamp(4rem, 16%, 8rem);
-
-  /* Theme transition */
-  transition: background-color var(--theme-transition), color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
 
   /* Z-index layers */
   --z-negative: -1;

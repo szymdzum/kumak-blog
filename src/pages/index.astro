@@ -5,7 +5,13 @@ import Footer from "@components/Footer.astro";
 
 import Hero from "@components/hero/Hero.astro";
 import Projects from "@components/Projects.astro";
-import Articles from "@components/Articles.astro";
+import PostPreview from "@components/blog/PostPreview.astro";
+import { getCollection } from "astro:content";
+import { PostsManager } from "../utils/postSorter";
+
+const limit = 9;
+const allPosts = await getCollection("blog");
+const latestPosts = PostsManager.getLatest(allPosts, limit);
 ---
 
 <!doctype html>
@@ -15,9 +21,34 @@ import Articles from "@components/Articles.astro";
     <Header />
     <main>
       <Hero />
+      <section>
+        {latestPosts.map((post) => <PostPreview post={post} />)}
+      </section>
       <Projects />
-      <Articles />
+      <Footer />
     </main>
-    <Footer />
   </body>
 </html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--primary-background);
+    color: var(--text-primary);
+  }
+
+  main {
+    width: 100%;
+    flex: 1;
+    margin-inline: auto;
+    max-width: 80ch;
+    padding-inline: var(--padding-sm);
+  }
+
+  footer {
+    margin-top: auto;
+    padding: var(--padding-sm);
+  }
+</style>
