@@ -4,15 +4,16 @@ import AncientSymbols from "./AncientSymbols.astro";
 import GridBackground from "./GridBackground.astro";
 ---
 
-<section class="hero">
-  <GridBackground />
-  <div class="hero-content">
-    <h1>{siteConfig.name}</h1>
-    <AncientSymbols />
-    <p class="tagline">{siteConfig.tagline}</p>
-  </div>
-</section>
-
+<div class="hero-container">
+  <section class="hero">
+    <GridBackground />
+    <div class="hero-content">
+      <h1>{siteConfig.name}</h1>
+      <p class="tagline">{siteConfig.tagline}</p>
+    </div>
+  </section>
+  <AncientSymbols />
+</div>
 <style>
   .hero {
     width: 100%;
