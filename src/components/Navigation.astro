@@ -13,7 +13,6 @@ const currentPath = Astro.url.pathname;
           <a
             href={href}
             role="menuitem"
-            class="text-lg"
             aria-current={isPathActive(currentPath, href) ? "page" : undefined}
           >
             {title}

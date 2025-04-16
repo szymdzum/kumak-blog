@@ -1,3 +1,23 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--primary-background);
+  color: var(--text-primary);
+}
+
+main {
+  width: 100%;
+  flex: 1;
+  margin-inline: auto;
+  max-width: 80ch;
+}
+
+footer {
+  margin-top: auto;
+  padding: var(--padding-sm);
+}
+
 .center {
   margin-inline: auto;
   box-sizing: content-box;
