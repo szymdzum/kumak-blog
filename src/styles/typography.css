@@ -71,7 +71,6 @@ h1 {
 
 h2 {
   font-size: var(--font-size-2xl);
-
   text-transform: uppercase;
   letter-spacing: 0.10em;
 }

@@ -9,7 +9,7 @@ import GridBackground from "./GridBackground.astro";
   <div class="hero-content">
     <h1>{siteConfig.name}</h1>
     <AncientSymbols />
-    <!-- <p class="tagline">{siteConfig.tagline}</p> -->
+    <p class="tagline">{siteConfig.tagline}</p>
   </div>
 </section>
 
@@ -18,55 +18,20 @@ import GridBackground from "./GridBackground.astro";
     width: 100%;
     position: relative;
     height: 70vh; /* Reduced from 120vh */
-    padding-top: var(--s4);
-    margin-bottom: var(--s3);
     overflow: hidden;
-    border-bottom: 1px solid rgba(171, 160, 160, 0.887);
   }
 
   .hero-content {
     display: flex;
-    margin-inline: auto;
-    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    position: relative;
-    z-index: 1;
+    margin-top: var(--s4);
   }
-
-  /* .hero-content h1 {
-    font-size: 5rem;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(230, 230, 230, 0.95) 50%,
-      rgba(200, 200, 200, 0.9) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-
-    letter-spacing: -0.02em;
-    transform: scale(1);
-    transition: transform 0.3s ease;
-  } */
-
-  /* .hero-content h1:hover {
-    transform: scale(1.02);
-  } */
 
   .tagline {
     color: var(--color-muted);
     max-width: 40ch;
     font-size: 1.2rem;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 0.75rem 1.25rem;
-    border-radius: 4px;
-    backdrop-filter: blur(8px);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   @media (min-width: 640px) {

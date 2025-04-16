@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'The Null Hypothesis',
   url: 'https://kumak.dev',
   description: 'A blog about technology, programming, and more',
-  tagline: 'Where decade of code meet moments of clarity.',
+  tagline: 'Just sharing my thoughts about and on the internet.',
   image: '/social-image-home.jpg',
   // Author/owner info
   author: 'Kumak',
@@ -28,9 +28,9 @@ export const siteConfig = {
   // Navigation items
   navItems: [
     { title: 'Home', href: '/' },
+    { title: 'About', href: '/about' },
     { title: 'Projects', href: '/projects' },
     { title: 'Blog', href: '/blog' },
-    { title: 'About', href: '/about' },
   ],
 } as const;
 

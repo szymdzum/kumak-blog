@@ -1,33 +1,26 @@
 ---
-import Container from "./Container.astro";
 import Navigation from "./Navigation.astro";
 import Social from "./Social.astro";
 ---
 
 <header>
-  <Container layout="row">
+  <div>
     <Navigation />
     <Social />
-  </Container>
+  </div>
 </header>
 
 <style>
   header {
-    position: sticky;
     top: 0;
-    z-index: var(--z-modal);
+    position: sticky;
+    z-index: var(--z-sticky);
     background-color: rgb(var(--primary-background));
-    border-bottom: 1px solid var(--color-border);
   }
-
-  .row {
+  header div {
+    display: flex;
     flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .column {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--space-sm);
+    justify-content: space-around;
+    align-items: center;
   }
 </style>
