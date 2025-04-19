@@ -3,6 +3,11 @@ description: Project-specific guidelines for Astro with Deno runtime
 globs: ["**/*.{ts,js,tsx,jsx,astro}"]
 alwaysApply: true
 ---
+# See also
+- [index.mdc](./index.mdc)
+- [css.mdc](./css.mdc)
+- [astro.mdc](./astro.mdc)
+
 # Astro + Deno Project Setup
 
 ## Core Configuration
@@ -89,4 +94,3 @@ src/
 
 - Uses plain CSS files in `src/styles/`
 - No CSS preprocessors or frameworks
-

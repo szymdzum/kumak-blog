@@ -14,11 +14,16 @@ import GridBackground from "./GridBackground.astro";
   </section>
   <AncientSymbols />
 </div>
+
 <style>
   .hero {
     width: 100%;
     position: relative;
-    height: 70vh; /* Reduced from 120vh */
+    /* Use proportional value for height, fallback to 70vh if needed */
+    height: var(
+      --hero-height,
+      70vh
+    ); /* --hero-height can be set globally for consistency */
     overflow: hidden;
   }
 
@@ -31,8 +36,11 @@ import GridBackground from "./GridBackground.astro";
 
   .tagline {
     color: var(--color-muted);
-    max-width: 40ch;
-    font-size: 1.2rem;
+    max-width: var(--measure, 40ch); /* Use --measure for readable text width */
+    font-size: var(
+      --font-size-lg,
+      1.25rem
+    ); /* Use modular scale, fallback to 1.25rem */
   }
 
   @media (min-width: 640px) {

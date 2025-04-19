@@ -1,0 +1,54 @@
+# Project Rules Index
+
+## Table of Contents
+1. [css.mdc](#cssmdc)
+2. [astro.mdc](#astromdc)
+3. [main.mdc](#mainmdc)
+4. [deno-astro-setup.mdc](#deno-astro-setupmdc)
+5. [cursor-rules-check.mdc](#cursor-rules-checkmdc)
+6. [agent-workflow.mdc](#agent-workflowmdc)
+
+---
+
+## Rule File Summaries
+
+### 1. css.mdc
+- **Scope:** CSS framework, styling philosophy, global vs. component-scoped styles, exception-based styling, proportional values, and custom properties.
+- **Audience:** All contributors writing or reviewing CSS.
+- **Notes:** Defines best practices for both global and local styles. See the "Global vs. Component-Scoped Styles: Policy" and "Conflict Resolution" sections for guidance on resolving overlaps.
+
+### 2. astro.mdc
+- **Scope:** Astro component development, file organization, naming conventions, props, slots, accessibility, and CSS usage in Astro files.
+- **Audience:** All contributors working with Astro components.
+- **Notes:** Recommends component-scoped styles by default, but encourages use of design tokens and global styles for consistency. See "Global vs. Component-Scoped Styles: Policy" and "Conflict Resolution" for overlap guidance.
+
+### 3. main.mdc
+- **Scope:** Development workflow, version control, error handling, performance, build and deployment, and conflict resolution.
+- **Audience:** All contributors, especially those managing workflow and releases.
+- **Notes:** Contains the primary conflict resolution policy for the project.
+
+### 4. deno-astro-setup.mdc
+- **Scope:** Project-specific setup for Astro with Deno runtime, including versioning, structure, commands, and technical constraints.
+- **Audience:** Developers setting up or maintaining the runtime environment.
+- **Notes:** The only file with explicit Astro and Deno version numbers. Refer here for environment compatibility.
+
+### 5. cursor-rules-check.mdc
+- **Scope:** Meta-rule requiring all agents and contributors to check the .cursor/rules directory before making changes.
+- **Audience:** All contributors and automation agents.
+- **Notes:** Ensures project-specific rules are always referenced.
+
+### 6. agent-workflow.mdc
+- **Scope:** Agent/AI workflow and automation guidelines.
+- **Audience:** AI agents and maintainers integrating automation.
+- **Notes:** Not directly relevant to most code contributions, but important for automated processes.
+
+---
+
+## Rule Precedence
+- In case of conflict, follow this order:
+  1. **main.mdc** (workflow, conflict resolution, and project-wide policies)
+  2. **css.mdc** and **astro.mdc** (styling and component-specific rules)
+  3. **deno-astro-setup.mdc** (runtime and environment setup)
+  4. **cursor-rules-check.mdc** (meta-rule: always check rules)
+  5. **agent-workflow.mdc** (automation-specific)
+- If a conflict cannot be resolved by this order, escalate to the project maintainer and document the outcome in this file.

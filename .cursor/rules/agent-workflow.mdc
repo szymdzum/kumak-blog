@@ -1,4 +1,13 @@
+---
+description:
+globs:
+alwaysApply: false
+---
 # Agent-Driven Rule Validation and User Notification Workflow
+
+# See also
+- [index.mdc](./index.mdc)
+- [cursor-rules-check.mdc](./cursor-rules-check.mdc)
 
 ## Purpose
 This document establishes the formal workflow for agent-driven rule validation, discrepancy notification, and user-in-the-loop rule management. Its goal is to ensure that all `.cursor/rules` files remain up-to-date, authoritative, and faithfully reflect the current state and philosophy of the codebase across all domains (CSS, Astro, Deno, content, etc.).
@@ -23,7 +32,7 @@ This document establishes the formal workflow for agent-driven rule validation, 
    - All rule amendments or documentation changes must be surfaced to the user for review and approval.
 
 5. **Strict Rule Adherence**
-   - The agent’s workflow is as follows:
+   - The agent's workflow is as follows:
      1. Read and validate rules.
      2. Report discrepancies or required updates.
      3. Await user input/confirmation.

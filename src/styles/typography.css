@@ -207,7 +207,7 @@ textarea:focus {
   }
 
   /* Option 1: Spacing between paragraphs */
-  p+p {
+  p + p {
     margin-top: var(--rhythm);
   }
 }

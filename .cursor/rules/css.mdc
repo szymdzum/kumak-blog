@@ -1,10 +1,15 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: true
 ---
 
 # CSS Framework Guidelines: The Power of Exception-Based Styling
+
+# See also
+- [astro.mdc](mdc:astro.mdc)
+- [main.mdc](mdc:main.mdc)
+- [index.mdc](mdc:index.mdc)
 
 ## Core Philosophy
 
@@ -203,3 +208,25 @@ This project uses a layered, modular CSS architecture. The following files are p
 **Model Guidance:**
 - Always check this rule for guidance on CSS structure, file locations, and best practices before making or suggesting CSS changes.
 - When in doubt, prefer extending global styles over adding new local/component styles.
+
+# Global vs. Component-Scoped Styles: Policy
+
+## When to Use Global Styles
+- Use global styles for typography, layout primitives, color schemes, and spacing tokens that should apply project-wide.
+- Extend or override global styles in `typography.css`, `layout.css`, or other global CSS files for consistency.
+- Prefer global styles for elements that appear on multiple pages or across the site.
+
+## When to Use Component-Scoped Styles
+- Use component-scoped styles for unique visual treatments or layout needs specific to a single component.
+- Isolate styles that should not affect or be affected by other components.
+- Use component-scoped styles for interactive or feature-specific UI islands.
+
+## Best Practices
+- Always use CSS custom properties (design tokens) for colors, spacing, and sizing, even in component-scoped styles, to maintain consistency.
+- Use proportional values (e.g., `var(--s1)`, `1.5rem`) instead of hardcoded pixel values whenever possible.
+- If a style is repeated in more than one component, consider moving it to a global stylesheet.
+
+## Conflict Resolution
+- If a rule in a global stylesheet conflicts with a component-scoped style, the component-scoped style should take precedence for that component only.
+- In case of ambiguity, prefer extending global styles rather than duplicating them locally.
+- If a contradiction cannot be resolved by scope, escalate to the project maintainer for a decision and document the outcome in this section.

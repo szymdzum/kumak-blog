@@ -1,8 +1,14 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: true
 ---
+
+# See also
+- [css.mdc](./css.mdc)
+- [astro.mdc](./astro.mdc)
+- [index.mdc](./index.mdc)
+
 Development Workflow
 Incremental Development
 
@@ -80,3 +86,13 @@ Development Workflow
 ✅ Regularly ask: "Is this what we are trying to achieve?"
 ✅ Document decision points and confirmations in code comments
 ✅ Keep commits small and focused on specific changes
+
+# Conflict Resolution
+
+- If two rules appear to contradict, first check the index or README for rule precedence.
+- If the conflict is between a global and a component-specific rule, the component-specific rule takes precedence for that component only.
+- Prefer extending or clarifying global rules rather than duplicating logic locally.
+- If a contradiction cannot be resolved by scope or precedence, escalate to the project maintainer for a decision and document the outcome in this section.
+
+Version Compatibility
+Astro v5.6.1, Deno v2.2.9, and August 2024 rule validation.
